@@ -17,7 +17,7 @@ html {
 }
 
 .menu {
-  margin: 0.5em 0 0.5em 1em;
+  margin: 0.5em 0 0.5em 0.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,7 +28,7 @@ html {
 }
 .menu-left svg {
   width: auto;
-  height: 42px;
+  height: 45px;
 }
 .menu-left svg path {
   fill: var(--color-fg);
@@ -99,6 +99,9 @@ body {
   flex: 1;
 }
 
+.playground-dropdown {
+  display: contents;
+}
 .playground-dropdown select {
   color: var(--color-fg);
   margin: 0;
@@ -115,19 +118,21 @@ body {
   box-sizing: border-box;
   font-size: 0.75em;
   border: 2px solid var(--color-fg);
+  border-radius: 5px;
   overflow: hidden;
 }
 .playground-dropdown::after {
-  font-size: 1em;
+  font-family: calder-dark, sans-serif;
+  font-size: 0.7em;
   position: relative;
   cursor: pointer;
   pointer-events: none;
-  left: -1.75em;
+  left: -1.5em;
   content: "▼";
 }
 
 .playground-controls {
-  margin-right: 1.2em;
+  margin-right: 0.7em;
 }
 .playground-controls button {
   color: var(--color-fg);
@@ -156,5 +161,3 @@ body {
   height: calc(100vh - 6em);
   direction: ltr;
 }
-
-/*# sourceMappingURL=style.css.map */
