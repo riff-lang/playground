@@ -106,7 +106,7 @@
             <button onclick="riffExec(0);">Disassemble</button>
         </div>
         <div class='playground-dropdown'>
-            <select onchange="riffLoadSample(this.value);">
+            <select class='playground-dropdown' onchange='riffLoadSample(this.value);'>
                 <option selected disabled>Sample Programs</option>
                 <option value='hello'>Hello, World!</option>
                 <option value='factorial'>Factorial</option>
@@ -114,7 +114,7 @@
             </select>
         </div>
         <div class='playground-dropdown'>
-            <select onchange='changeTheme(this.value);'>
+            <select class='playground-dropdown' onchange='changeTheme(this.value);'>
                 <option selected disabled>Playground Theme</option>
                 <option value='default'>default</option>
                 <option value='3024-day'>3024-day</option>
