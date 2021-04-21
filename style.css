@@ -103,6 +103,7 @@ body {
   margin-left: 0.5em;
   position: relative;
   color: var(--color-fg);
+  background-color: var(--color-bg);
 }
 .playground-dropdown select {
   margin: 0;
@@ -112,7 +113,6 @@ body {
   -moz-appearance: none;
   -ms-appearance: none;
   appearance: none;
-  background: none;
   outline: 0;
   padding: 0.5em;
   padding-right: 2em;
