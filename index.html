@@ -11,19 +11,17 @@
 
 <link rel="stylesheet" href="theme/3024-day.css">
 <link rel="stylesheet" href="theme/3024-night.css">
-<link rel="stylesheet" href="theme/abcdef.css">
 <link rel="stylesheet" href="theme/ayu-dark.css">
 <link rel="stylesheet" href="theme/ayu-mirage.css">
 <link rel="stylesheet" href="theme/base16-dark.css">
-<link rel="stylesheet" href="theme/bespin.css">
 <link rel="stylesheet" href="theme/base16-light.css">
+<link rel="stylesheet" href="theme/bespin.css">
 <link rel="stylesheet" href="theme/blackboard.css">
 <link rel="stylesheet" href="theme/cobalt.css">
 <link rel="stylesheet" href="theme/colorforth.css">
 <link rel="stylesheet" href="theme/dracula.css">
 <link rel="stylesheet" href="theme/duotone-dark.css">
 <link rel="stylesheet" href="theme/duotone-light.css">
-<link rel="stylesheet" href="theme/erlang-dark.css">
 <link rel="stylesheet" href="theme/gruvbox-dark.css">
 <link rel="stylesheet" href="theme/hopscotch.css">
 <link rel="stylesheet" href="theme/icecoder.css">
@@ -47,13 +45,11 @@
 <link rel="stylesheet" href="theme/paraiso-light.css">
 <link rel="stylesheet" href="theme/pastel-on-dark.css">
 <link rel="stylesheet" href="theme/railscasts.css">
-<link rel="stylesheet" href="theme/rubyblue.css">
 <link rel="stylesheet" href="theme/seti.css">
 <link rel="stylesheet" href="theme/the-matrix.css">
 <link rel="stylesheet" href="theme/tomorrow-night-bright.css">
 <link rel="stylesheet" href="theme/tomorrow-night-eighties.css">
 <link rel="stylesheet" href="theme/twilight.css">
-<link rel="stylesheet" href="theme/vibrant-ink.css">
 <link rel="stylesheet" href="theme/yeti.css">
 <link rel="stylesheet" href="theme/darcula.css">
 <link rel="stylesheet" href="theme/yonce.css">
@@ -66,7 +62,7 @@
 <body>
 <div class="main">
     <div class='menu'>
-    <div class="menu-left">
+    <div class="menu-logo">
         <a href="https://riff.cx">
             <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -100,74 +96,92 @@
     </g>
 </svg></a>
     </div>
-    <div class="menu-right">
+    <div class="menu-controls">
         <div class='playground-controls'>
-            <button onclick="riffExec(1);">Execute</button>
-            <button onclick="riffExec(0);">Disassemble</button>
-        </div>
-        <div class='playground-dropdown'>
-            <select class='playground-dropdown' onchange='riffLoadSample(this.value);'>
-                <option selected disabled>Sample Programs</option>
-                <option value='hello'>Hello, World!</option>
-                <option value='factorial'>Factorial</option>
-                <option value='fibonacci'>Fibonacci</option>
-            </select>
-        </div>
-        <div class='playground-dropdown'>
-            <select class='playground-dropdown' onchange='changeTheme(this.value);'>
-                <option selected disabled>Playground Theme</option>
-                <option value='default'>default</option>
-                <option value='3024-day'>3024-day</option>
-                <option value='3024-night'>3024-night</option>
-                <option value='abcdef'>abcdef</option>
-                <option value='ayu-dark'>ayu-dark</option>
-                <option value='ayu-mirage'>ayu-mirage</option>
-                <option value='base16-dark'>base16-dark</option>
-                <option value='base16-light'>base16-light</option>
-                <option value='bespin'>bespin</option>
-                <option value='blackboard'>blackboard</option>
-                <option value='cobalt'>cobalt</option>
-                <option value='colorforth'>colorforth</option>
-                <option value='darcula'>darcula</option>
-                <option value='dracula'>dracula</option>
-                <option value='duotone-dark'>duotone-dark</option>
-                <option value='duotone-light'>duotone-light</option>
-                <option value='erlang-dark'>erlang-dark</option>
-                <option value='gruvbox-dark'>gruvbox-dark</option>
-                <option value='hopscotch'>hopscotch</option>
-                <option value='icecoder'>icecoder</option>
-                <option value='isotope'>isotope</option>
-                <option value='lesser-dark'>lesser-dark</option>
-                <option value='lucario'>lucario</option>
-                <option value='material'>material</option>
-                <option value='material-darker'>material-darker</option>
-                <option value='material-palenight'>material-palenight</option>
-                <option value='material-ocean'>material-ocean</option>
-                <option value='mbo'>mbo</option>
-                <option value='mdn-like'>mdn-like</option>
-                <option value='midnight'>midnight</option>
-                <option value='monokai'>monokai</option>
-                <option value='moxer'>moxer</option>
-                <option value='neo'>neo</option>
-                <option value='nord'>nord</option>
-                <option value='oceanic-next'>oceanic-next</option>
-                <option value='panda-syntax'>panda-syntax</option>
-                <option value='paraiso-dark'>paraiso-dark</option>
-                <option value='paraiso-light'>paraiso-light</option>
-                <option value='pastel-on-dark'>pastel-on-dark</option>
-                <option value='railscasts'>railscasts</option>
-                <option value='rubyblue'>rubyblue</option>
-                <option value='seti'>seti</option>
-                <option value='the-matrix'>the-matrix</option>
-                <option value='tomorrow-night-bright'>tmrw-night-bright</option>
-                <option value='tomorrow-night-eighties'>tmrw-night-80s</option>
-                <option value='twilight'>twilight</option>
-                <option value='vibrant-ink'>vibrant-ink</option>
-                <option value='yeti'>yeti</option>
-                <option value='yonce'>yonce</option>
-                <option value='zenburn'>zenburn</option>
+            <button onclick="riffExec(1);">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+  <path id="Icon_awesome-play" data-name="Icon awesome-play" d="M28.42,12.58,4.848.387C2.933-.6,0,.358,0,2.807v24.38c0,2.2,2.726,3.521,4.848,2.42L28.42,17.42a2.643,2.643,0,0,0,0-4.84Z" transform="translate(0 -0.002)"/>
+</svg>
+                <span class='tooltip'>Execute</span>
+            </button>
+            <button onclick="riffExec(0);">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 38.58">
+  <path id="Icon_metro-file-binary" data-name="Icon metro-file-binary" d="M673.812,395.191H660.955V378.048h12.857Zm-4.286-12.857h-4.286v8.571h4.286Zm0,30.009h4.286v4.286H660.955v-4.295h4.286v-8.571h-4.286v-4.286h8.571Zm17.143-21.429h4.286V395.2H678.1v-4.295h4.286v-8.571H678.1v-4.286h8.571Zm4.286,25.714H678.1V399.477h12.857Zm-4.286-12.857h-4.286v8.571h4.286v-8.571Z" transform="translate(-660.955 -378.048)"/>
+</svg>
+                <span class='tooltip'>Disassemble</span>
+            </button>
+            <button onclick="revealDropdown('samples-dropdown');">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.93 36">
+  <path id="Icon_awesome-swatchbook" data-name="Icon awesome-swatchbook" d="M33.684,22.5H26.177L13.089,35.614c-.145.146-.316.252-.469.386H33.684a2.248,2.248,0,0,0,2.246-2.25v-9A2.248,2.248,0,0,0,33.684,22.5ZM30.555,11.749,24.2,5.385a2.242,2.242,0,0,0-3.176,0L15.719,10.7V29.25c0,.208-.047.4-.061.608l14.9-14.926A2.254,2.254,0,0,0,30.555,11.749ZM13.473,2.25A2.248,2.248,0,0,0,11.227,0H2.246A2.248,2.248,0,0,0,0,2.25v27a6.737,6.737,0,1,0,13.473,0ZM6.737,30.938A1.688,1.688,0,1,1,8.421,29.25,1.686,1.686,0,0,1,6.737,30.938ZM8.982,18H4.492V13.5H8.983V18Zm0-9H4.492V4.5H8.983V9Z"/>
+</svg>
 
-            </select>
+                <span class='tooltip'></span>
+                <ul id='samples-dropdown' class='playground-dropdown'>
+                    <li class='dropdown-header'>Sample programs</li>
+                    <li><a href="javascript:riffLoadSample('hello');">Hello, World!</a></li>
+                    <li><a
+                            href="javascript:riffLoadSample('factorial');">Factorial</a></li>
+                    <li><a
+                            href="javascript:riffLoadSample('fibonacci');">Fibonacci</a></li>
+                </ul>
+            </button>
+            <button onclick="revealDropdown('themes-dropdown');">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.999 35.999">
+  <path id="Icon_awesome-palette" data-name="Icon awesome-palette" d="M14.365.352a17.9,17.9,0,0,0-14,13.95c-2.6,13.148,9.26,22.95,18.2,21.565,2.9-.45,4.317-3.839,2.988-6.448A4.757,4.757,0,0,1,25.833,22.5h5.6A4.6,4.6,0,0,0,36,17.909,18.014,18.014,0,0,0,14.365.352ZM6.75,22.5A2.25,2.25,0,1,1,9,20.25,2.248,2.248,0,0,1,6.75,22.5ZM9,13.5a2.25,2.25,0,1,1,2.25-2.25A2.248,2.248,0,0,1,9,13.5ZM18,9a2.25,2.25,0,1,1,2.25-2.25A2.248,2.248,0,0,1,18,9Zm9,4.5a2.25,2.25,0,1,1,2.25-2.25A2.248,2.248,0,0,1,27,13.5Z" transform="translate(-0.001 0.002)"/>
+</svg>
+
+                <span class='tooltip'></span>
+                <ul id='themes-dropdown' class='playground-dropdown'>
+                    <li class='dropdown-header'>Playground themes</li>
+                    <li><a href="javascript:changeTheme('default');">default</a></li>
+                    <li><a href="javascript:changeTheme('3024-day');">3024-day</a></li>
+                    <li><a href="javascript:changeTheme('3024-night');">3024-night</a></li>
+                    <li><a href="javascript:changeTheme('ayu-dark');">ayu-dark</a></li>
+                    <li><a href="javascript:changeTheme('ayu-mirage');">ayu-mirage</a></li>
+                    <li><a href="javascript:changeTheme('base16-dark');">base16-dark</a></li>
+                    <li><a href="javascript:changeTheme('base16-light');">base16-light</a></li>
+                    <li><a href="javascript:changeTheme('bespin');">bespin</a></li>
+                    <li><a href="javascript:changeTheme('blackboard');">blackboard</a></li>
+                    <li><a href="javascript:changeTheme('cobalt');">cobalt</a></li>
+                    <li><a href="javascript:changeTheme('colorforth');">colorforth</a></li>
+                    <li><a href="javascript:changeTheme('darcula');">darcula</a></li>
+                    <li><a href="javascript:changeTheme('dracula');">dracula</a></li>
+                    <li><a href="javascript:changeTheme('duotone-dark');">duotone-dark</a></li>
+                    <li><a href="javascript:changeTheme('duotone-light');">duotone-light</a></li>
+                    <li><a href="javascript:changeTheme('gruvbox-dark');">gruvbox-dark</a></li>
+                    <li><a href="javascript:changeTheme('hopscotch');">hopscotch</a></li>
+                    <li><a href="javascript:changeTheme('icecoder');">icecoder</a></li>
+                    <li><a href="javascript:changeTheme('isotope');">isotope</a></li>
+                    <li><a href="javascript:changeTheme('lesser-dark');">lesser-dark</a></li>
+                    <li><a href="javascript:changeTheme('lucario');">lucario</a></li>
+                    <li><a href="javascript:changeTheme('material');">material</a></li>
+                    <li><a href="javascript:changeTheme('material-darker');">material-darker</a></li>
+                    <li><a href="javascript:changeTheme('material-palenight');">material-palenight</a></li>
+                    <li><a href="javascript:changeTheme('material-ocean');">material-ocean</a></li>
+                    <li><a href="javascript:changeTheme('mbo');">mbo</a></li>
+                    <li><a href="javascript:changeTheme('mdn-like');">mdn-like</a></li>
+                    <li><a href="javascript:changeTheme('midnight');">midnight</a></li>
+                    <li><a href="javascript:changeTheme('monokai');">monokai</a></li>
+                    <li><a href="javascript:changeTheme('moxer');">moxer</a></li>
+                    <li><a href="javascript:changeTheme('neo');">neo</a></li>
+                    <li><a href="javascript:changeTheme('nord');">nord</a></li>
+                    <li><a href="javascript:changeTheme('oceanic-next');">oceanic-next</a></li>
+                    <li><a href="javascript:changeTheme('panda-syntax');">panda-syntax</a></li>
+                    <li><a href="javascript:changeTheme('paraiso-dark');">paraiso-dark</a></li>
+                    <li><a href="javascript:changeTheme('paraiso-light');">paraiso-light</a></li>
+                    <li><a href="javascript:changeTheme('pastel-on-dark');">pastel-on-dark</a></li>
+                    <li><a href="javascript:changeTheme('railscasts');">railscasts</a></li>
+                    <li><a href="javascript:changeTheme('seti');">seti</a></li>
+                    <li><a href="javascript:changeTheme('the-matrix');">the-matrix</a></li>
+                    <li><a href="javascript:changeTheme('tomorrow-night-bright');">tmrw-night-bright</a></li>
+                    <li><a
+                            href="javascript:changeTheme('tomorrow-night-eighties');">tmrw-night-80s</a></li>
+                    <li><a href="javascript:changeTheme('twilight');">twilight</a></li>
+                    <li><a href="javascript:changeTheme('yeti');">yeti</a></li>
+                    <li><a href="javascript:changeTheme('yonce');">yonce</a></li>
+                    <li><a href="javascript:changeTheme('zenburn');">zenburn</a></li>
+                </ul>
+            </button>
         </div>
     </div>
     </div>
@@ -256,7 +270,7 @@
 
     // Set theme as default
     // Changes the CSS vars `--color-fg` and `--color-bg`
-    changeTheme('default');
+    changeTheme('base16-light');
 
     // Initialize with "Hello, World!"
     riffLoadSample('hello');
@@ -289,6 +303,10 @@
         else
             document.getElementById('output-title').innerHTML =
                 'Output';
+    }
+
+    function revealDropdown(d) {
+        document.getElementById(d).classList.toggle('open');
     }
 
     function riffLoadSample(sample) {
