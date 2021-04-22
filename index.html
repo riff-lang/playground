@@ -175,13 +175,7 @@
         <div class='playground-left'>
             <div class='playground-header'><div>Input</div></div>
             <div class='playground-input'>
-                <textarea id='input'
-                          autofocus
-                          autocomplete='off'
-                          autocapitalize='off'
-                          spellcheck='false'>
-// This code is editable!
-"Hello, world!"</textarea>
+                <textarea id='input'></textarea>
             </div>
         </div>
         <div class='playground-right'>
@@ -190,7 +184,7 @@
                 <div id='metrics'></div>
             </div>
             <div class='playground-output'>
-                <textarea id="output" readonly></textarea>
+                <textarea id='output' readonly></textarea>
             </div>
         </div>
     </div>
@@ -200,12 +194,12 @@
     var Module = {
         preRun: [],
         postRun: [],
+        noInitialRun: true,
         print: (function() {
             var element = document.getElementById('output');
 
             // Clear output textarea
-            if (element)
-                element.value = '';
+            if (element) element.value = '';
             return function(text) {
                 if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
                 console.log(text);
@@ -230,9 +224,6 @@
             this.totalDependencies = Math.max(this.totalDependencies, left);
         }
     };
-    // TODO Riff interpreter error handling
-    window.onerror = function(event) {
-    };
 </script>
 <script type='text/javascript'>
 
@@ -250,6 +241,7 @@
         mode:           'riff',
     });
 
+    // Output textarea (readonly)
     var cmOutput =
     CodeMirror.fromTextArea(document.getElementById('output'), {
         lineNumbers:    false,
@@ -265,6 +257,9 @@
     // Set theme as default
     // Changes the CSS vars `--color-fg` and `--color-bg`
     changeTheme('default');
+
+    // Initialize with "Hello, World!"
+    riffLoadSample('hello');
 
     // Riff code execution
     function riffExec(exec) {
