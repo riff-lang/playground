@@ -17,46 +17,33 @@ html {
 .menu {
   margin: 0.5em;
   display: flex;
-  flex-direction: column;
   align-items: center;
-}
-@media screen and (max-width: 600px) {
-  .menu {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+  justify-content: space-between;
 }
 
-.menu-logo {
+.menu-left {
   order: 1;
-  margin-bottom: 1em;
 }
-.menu-logo svg {
+.menu-left svg {
   width: auto;
   height: 45px;
 }
-.menu-logo svg path {
+.menu-left svg path {
   fill: var(--color-fg);
 }
 @media screen and (max-width: 600px) {
-  .menu-logo {
+  .menu-left {
     margin-bottom: 0;
   }
-  .menu-logo svg {
+  .menu-left svg {
     height: 60px;
   }
 }
 
-.menu-controls {
+.menu-right {
   order: 2;
   display: flex;
-  flex-direction: column;
   align-items: center;
-}
-@media screen and (max-width: 600px) {
-  .menu-controls {
-    flex-direction: row;
-  }
 }
 
 body {
@@ -69,17 +56,11 @@ body {
 .main {
   display: flex;
   height: calc(100vh);
-}
-@media screen and (max-width: 600px) {
-  .main {
-    flex-direction: column;
-    width: calc(100vw);
-  }
+  flex-direction: column;
 }
 
 .playground {
   display: flex;
-  flex-direction: row;
 }
 @media screen and (max-width: 600px) {
   .playground {
@@ -127,87 +108,142 @@ body {
   flex: 1;
 }
 
-.playground-dropdown {
+.settings {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 1em;
   transition: 0.05s all linear;
-  float: left;
-  visibility: hidden;
+}
+
+.dropdown {
+  font-family: source-code-pro, "source code pro", monospace;
+  top: 45px;
+  right: 5px;
+  display: none;
   position: absolute;
   max-height: 400px;
-  width: 200px;
   overflow-y: scroll;
   background-color: var(--color-fg);
   text-align: left;
-  top: 1.25em;
-  left: 125%;
   z-index: 20;
   border-radius: 5px;
-  margin: 0;
-  padding: 0;
   color: var(--color-fg);
 }
-.playground-dropdown::after {
-  content: " ";
-  visibility: visible;
-  position: absolute;
-  top: 15%;
-  right: 100%;
-  margin-top: 5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent var(--color-fg) transparent transparent;
+.dropdown ul {
+  margin: 0;
+  padding: 0;
 }
-.playground-dropdown li {
+.dropdown li {
   list-style: none;
 }
-.playground-dropdown li a {
+.dropdown li a {
   padding: 0.2em 1em;
   display: block;
   color: var(--color-bg);
   text-decoration: none;
   white-space: nowrap;
 }
-.playground-dropdown li a:hover {
+.dropdown li a:hover {
   color: var(--color-fg);
   background-color: var(--color-bg);
 }
-@media screen and (max-width: 600px) {
-  .playground-dropdown {
-    display: none;
-  }
+
+.open {
+  display: block;
 }
 
-.dropdown-header {
-  padding: 0.5em 1em;
-  color: var(--color-bg);
-  border-bottom: 1px solid var(--color-bg);
-  margin-bottom: 0.5em;
-}
-
-.playground-controls {
+.controls {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  margin: 0 0 0 1em;
 }
-@media screen and (max-width: 600px) {
-  .playground-controls {
-    flex-direction: row;
-  }
+
+.setting {
+  position: relative;
 }
-.playground-controls button {
-  min-width: 55px;
-  display: inline-block;
+
+button.setting {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
   position: relative;
   color: var(--color-fg);
   font-family: calder-dark, sans-serif;
-  float: left;
-  margin: 0;
-  padding: 0.9em 0.7em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.setting-left {
+  display: flex;
+  align-items: center;
+  border: 3px solid var(--color-fg);
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  padding: 0.25em 1em 0.25em 0;
+}
+.setting-left svg {
+  padding: 0 0.5em;
+  width: auto;
+  height: 20px;
+}
+.setting-left svg path {
+  fill: var(--color-fg);
+}
+
+.setting-right {
+  display: flex;
+  align-items: center;
+  border: 3px solid var(--color-fg);
+  border-radius: 0 5px 5px 0;
+  height: 36px;
+}
+.setting-right svg {
+  padding: 0 0.5em;
+  width: auto;
+  height: 10px;
+}
+.setting-right svg path {
+  fill: var(--color-fg);
+}
+
+button.control {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  margin: 0 0 0 1em;
+  position: relative;
+  color: var(--color-fg);
+  font-family: calder-dark, sans-serif;
+  padding: 0.25em 1em 0.25em 0;
   cursor: pointer;
   background: none;
   border: 3px solid var(--color-fg);
-  border-top: none;
+  border-radius: 5px;
 }
-.playground-controls button .tooltip {
-  transition: 0.05s all linear;
+button.control svg {
+  padding: 0 0.5em;
+  width: auto;
+  height: 20px;
+}
+button.control svg path {
+  fill: var(--color-fg);
+}
+
+button.help {
+  cursor: help;
+  position: relative;
+  border: none;
+  background: none;
+  margin: 0 0.5em;
+  padding: 0 0.2em;
+}
+button.help .tooltip {
+  font-family: source-code-pro, "source code pro", monospace;
+  width: 250px;
+  font-size: 1.1em;
+  transition: 0.1s all linear;
   visibility: hidden;
   z-index: 10;
   position: absolute;
@@ -215,91 +251,49 @@ body {
   background-color: var(--color-fg);
   border-radius: 5px;
   padding: 0.5em 1em;
-  white-space: nowrap;
   text-align: left;
-  top: 1.25em;
-  left: 125%;
+  top: 140%;
+  left: -52px;
+  margin-left: -60px;
 }
-@media screen and (max-width: 600px) {
-  .playground-controls button .tooltip {
-    display: none;
-  }
-}
-.playground-controls button .tooltip::after {
+button.help .tooltip::after {
   content: " ";
   position: absolute;
-  top: 15%;
-  right: 100%;
-  margin-top: 5px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent var(--color-fg) transparent transparent;
+  border-color: transparent transparent var(--color-fg) transparent;
 }
-.playground-controls button:hover > .tooltip {
+button.help:hover > .tooltip {
   visibility: visible;
 }
-.playground-controls button:hover > .playground-dropdown {
+button.help:hover > .playground-dropdown {
   visibility: visible;
 }
-@media screen and (max-width: 600px) {
-  .playground-controls button {
-    border: 3px solid var(--color-fg);
-    border-left: none;
-  }
-  .playground-controls button:hover > .tooltip {
-    visibility: hidden;
-  }
-  .playground-controls button:hover > .playground-dropdown {
-    visibility: hidden;
-  }
-}
-.playground-controls button svg {
+button.help svg {
   width: auto;
-  height: 35px;
+  height: 20px;
 }
-.playground-controls button svg path {
+button.help svg path {
   fill: var(--color-fg);
 }
-.playground-controls button:first-child {
+
+button.run {
   background-color: var(--color-fg);
-  border: 3px solid var(--color-fg);
-  border-bottom: none;
-  border-radius: 10px 10px 0 0;
-  padding: 0.9em;
+  color: var(--color-bg);
 }
-@media screen and (max-width: 600px) {
-  .playground-controls button:first-child {
-    border-radius: 10px 0 0 10px;
-  }
+button.run svg {
+  width: auto;
+  height: 16px;
 }
-.playground-controls button:first-child svg {
-  height: 30px;
-}
-.playground-controls button:first-child svg path {
+button.run svg path {
   fill: var(--color-bg);
-}
-.playground-controls button:last-child {
-  border: 3px solid var(--color-fg);
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-}
-@media screen and (max-width: 600px) {
-  .playground-controls button:last-child {
-    border-radius: 0 10px 10px 0;
-    border: 3px solid var(--color-fg);
-    border-left: none;
-  }
 }
 
 .CodeMirror {
   font-family: source-code-pro, "source code pro", monospace;
-  height: calc(100vh - 2em);
-  width: calc(45.5vw);
+  height: calc(100vh - 6em);
   direction: ltr;
-}
-@media screen and (max-width: 600px) {
-  .CodeMirror {
-    width: calc(100vw - 2em);
-    height: calc(42vh);
-  }
 }

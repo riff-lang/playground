@@ -24,15 +24,11 @@ html
 .menu
   margin: 0.5em
   display: flex
-  flex-direction: column
   align-items: center
-  @media screen and (max-width: 600px)
-    flex-direction: row
-    justify-content: space-between
+  justify-content: space-between
 
-.menu-logo
+.menu-left
   order: 1
-  margin-bottom: 1em
   svg
     width: auto
     height: 45px
@@ -43,13 +39,10 @@ html
     svg
       height: 60px
 
-.menu-controls
+.menu-right
   order: 2
   display: flex
-  flex-direction: column
   align-items: center
-  @media screen and (max-width: 600px)
-    flex-direction: row
 
 body
   background-color: var(--color-bg)
@@ -60,14 +53,10 @@ body
 .main
   display: flex
   height: calc(100vh)
-  @media screen and (max-width: 600px)
-    flex-direction: column
-    width: calc(100vw)
+  flex-direction: column
   
 .playground
   display: flex
-  // justify-content: space-between
-  flex-direction: row
   @media screen and (max-width: 600px)
     flex-direction: column
 
@@ -103,33 +92,30 @@ body
 .playground-output
   flex: 1
 
-.playground-dropdown
+.settings
+  display: flex
+  align-items: center
+  margin: 0 0 0 1em
   transition: 0.05s all linear
-  float: left
-  visibility: hidden
+  // float: left
+
+.dropdown
+  +monospace
+  top: 45px
+  right: 5px
+  display: none
   position: absolute
   max-height: 400px
-  width: 200px
+  // width: 200px
   overflow-y: scroll
   background-color: var(--color-fg)
   text-align: left
-  top: 1.25em
-  left: 125%
   z-index: 20
   border-radius: 5px
-  margin: 0
-  padding: 0
   color: var(--color-fg)
-  &::after
-    content: " "
-    visibility: visible
-    position: absolute
-    top: 15%
-    right: 100%
-    margin-top: 5px
-    border-width: 5px
-    border-style: solid
-    border-color: transparent var(--color-fg) transparent transparent
+  ul
+    margin: 0
+    padding: 0
   li
     list-style: none
     a
@@ -141,93 +127,127 @@ body
       &:hover
         color: var(--color-fg)
         background-color: var(--color-bg)
-  @media screen and (max-width: 600px)
-    display: none
 
-.dropdown-header
-  padding: 0.5em 1em
-  color: var(--color-bg)
-  border-bottom: 1px solid var(--color-bg)
-  margin-bottom: 0.5em
+.open
+  display: block
 
-.playground-controls
+.controls
   display: flex
-  flex-direction: column
-  @media screen and (max-width: 600px)
-    flex-direction: row
-  button
-    min-width: 55px
-    display: inline-block
-    position: relative
-    color: var(--color-fg)
-    +calder
-    float: left
-    margin: 0
-    padding: 0.9em 0.7em
-    cursor: pointer
-    background: none
-    border: 3px solid var(--color-fg)
-    border-top: none
-    .tooltip
-      transition: 0.05s all linear
-      visibility: hidden
-      z-index: 10
+  align-items: center
+  margin: 0 0 0 1em
+
+.setting
+  position: relative
+button.setting
+  display: flex
+  align-items: center
+  font-size: 1em
+  position: relative
+  color: var(--color-fg)
+  +calder
+  cursor: pointer
+  background: none
+  border: none
+  border-radius: 5px
+  
+.setting-left
+  display: flex
+  align-items: center
+  border: 3px solid var(--color-fg)
+  border-right: none
+  border-radius: 5px 0 0 5px
+  padding: 0.25em 1em 0.25em 0
+  svg
+    padding: 0 0.5em
+    width: auto
+    height: 20px
+    path
+      fill: var(--color-fg)
+
+.setting-right
+  display: flex
+  align-items: center
+  border: 3px solid var(--color-fg)
+  border-radius: 0 5px 5px 0
+  height: 36px
+  svg
+    padding: 0 0.5em
+    width: auto
+    height: 10px
+    path
+      fill: var(--color-fg)
+button.control
+  display: flex
+  align-items: center
+  font-size: 1em
+  margin: 0 0 0 1em
+  position: relative
+  color: var(--color-fg)
+  +calder
+  padding: 0.25em 1em 0.25em 0
+  cursor: pointer
+  background: none
+  border: 3px solid var(--color-fg)
+  border-radius: 5px
+  svg
+    padding: 0 0.5em
+    width: auto
+    height: 20px
+    path
+      fill: var(--color-fg)
+
+button.help
+  cursor: help
+  position: relative
+  border: none
+  background: none
+  margin: 0 0.5em
+  padding: 0 0.2em
+  .tooltip
+    +monospace
+    width: 250px
+    font-size: 1.1em
+    transition: 0.1s all linear
+    visibility: hidden
+    z-index: 10
+    position: absolute
+    color: var(--color-bg)
+    background-color: var(--color-fg)
+    border-radius: 5px
+    padding: 0.5em 1em
+    text-align: left
+    top: 140%
+    left: -52px
+    margin-left: -60px
+    &::after
+      content: " "
       position: absolute
-      color: var(--color-bg)
-      background-color: var(--color-fg)
-      border-radius: 5px
-      padding: 0.5em 1em
-      white-space: nowrap
-      text-align: left
-      top: 1.25em
-      left: 125%
-      @media screen and (max-width: 600px)
-        display: none
-      &::after
-        content: " "
-        position: absolute
-        top: 15%
-        right: 100%
-        margin-top: 5px
-        border-width: 5px
-        border-style: solid
-        border-color: transparent var(--color-fg) transparent transparent
-    &:hover > .tooltip
-      visibility: visible
-    &:hover > .playground-dropdown
-      visibility: visible
-    @media screen and (max-width: 600px)
-      border: 3px solid var(--color-fg)
-      border-left: none
-      &:hover > .tooltip
-        visibility: hidden
-      &:hover > .playground-dropdown
-        visibility: hidden
-    svg
-      width: auto
-      height: 35px
-      path
-        fill: var(--color-fg)
-    &:first-child
-      background-color: var(--color-fg)
-      border: 3px solid var(--color-fg)
-      border-bottom: none
-      border-radius: 10px 10px 0 0
-      padding: 0.9em
-      @media screen and (max-width: 600px)
-        border-radius: 10px 0 0 10px
-      svg
-        height: 30px
-        path
-          fill: var(--color-bg)
-    &:last-child
-      border: 3px solid var(--color-fg)
-      border-top: none
-      border-radius: 0 0 10px 10px
-      @media screen and (max-width: 600px)
-        border-radius: 0 10px 10px 0
-        border: 3px solid var(--color-fg)
-        border-left: none
+      bottom: 100%
+      left: 50%
+      margin-left: -5px
+      border-width: 5px
+      border-style: solid
+      border-color: transparent transparent var(--color-fg) transparent 
+  &:hover > .tooltip
+    visibility: visible
+  &:hover > .playground-dropdown
+    visibility: visible
+  svg
+    width: auto
+    height: 20px
+    path
+      fill: var(--color-fg)
+
+button.run
+  background-color: var(--color-fg)
+  // box-shadow: 3px 3px 0 var(--color-fg)
+  color: var(--color-bg)
+  // border: none
+  svg
+    width: auto
+    height: 16px
+    path
+      fill: var(--color-bg)
 
 // CodeMirror overrides
 
@@ -236,10 +256,5 @@ body
 // Set height, width, borders, and global font properties here
 .CodeMirror
   +monospace
-  height: calc(100vh - 2em)
-  width: calc(45.5vw)
+  height: calc(100vh - 6em)
   direction: ltr
-  @media screen and (max-width: 600px)
-    width: calc(100vw - 2em)
-    height: calc(42vh)
-    
