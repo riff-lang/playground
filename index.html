@@ -233,6 +233,7 @@
         preRun: [],
         postRun: [],
         noInitialRun: true,
+        noExitRuntime: true,
         print: (function() {
             var element = document.getElementById('output');
 
@@ -250,12 +251,7 @@
         printErr: function(text) {
             if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
             console.error(text);
-
-            // Custom error handling
-            document.getElementById('output-title').innerHTML =
-                '<span style="color:red";>Error</span>';
             document.getElementById('output').value = text;
-            cmOutput.setValue(document.getElementById('output').value);
         },
         totalDependencies: 0,
         monitorRunDependencies: function(left) {
@@ -314,19 +310,31 @@
 
         // Invoke the Riff interpreter with the input program
         // This calls a special wasm() function in riff.c
-        Module.ccall('wasm_main', 'number', ['number', 'string'],
-            [exec, inputProgram]);
+        try {
+            Module.ccall('wasm_main', 'number', ['number', 'string'],
+                [exec, inputProgram]);
+            if (exec == 0)
+                document.getElementById('output-title').innerHTML =
+                    'Disassembly';
+            else
+                document.getElementById('output-title').innerHTML =
+                    'Output';
+        } catch (e) {
+
+            // This allows Riff programs to `exit` without Emscripten
+            // treating it as an error
+            if (e.status != 0)
+                document.getElementById('output-title').innerHTML =
+                    '<span style="color:red";>Error</span>';
+            else
+                document.getElementById('output-title').innerHTML =
+                    'Output';
+        }
         cmOutput.setValue(document.getElementById('output').value);
         var execTime = Date.now() - start;
-        console.log('Runtime: ' + (execTime/1000));
+        console.log('Runtime: ' + (execTime / 1000));
         document.getElementById('metrics').innerHTML =
             'riff 0.1a / ~' + (execTime / 1000) + 's';
-        if (exec == 0)
-            document.getElementById('output-title').innerHTML =
-                'Disassembly';
-        else
-            document.getElementById('output-title').innerHTML =
-                'Output';
     }
 
     function revealDropdown(d) {
