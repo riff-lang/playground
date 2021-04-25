@@ -7,7 +7,6 @@
 	background: #292A2B;
 	color: #E6E6E6;
 	line-height: 1.5;
-	font-family: 'Operator Mono', 'Source Code Pro', Menlo, Monaco, Consolas, Courier New, monospace;
 }
 .cm-s-panda-syntax .CodeMirror-cursor { border-color: #ff2c6d; }
 .cm-s-panda-syntax .CodeMirror-activeline-background {
