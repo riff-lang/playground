@@ -44,15 +44,6 @@ body {
 .logo svg path {
   fill: var(--color-fg);
 }
-@media screen and (max-width: 600px) {
-  .logo {
-    margin-bottom: 0;
-  }
-  .logo svg {
-    height: 60px;
-  }
-}
-
 .controls {
   order: 2;
   display: flex;
@@ -151,6 +142,11 @@ button.run svg path {
   margin: 0 0 0 1em;
   transition: 0.05s all linear;
 }
+@media screen and (max-width: 800px) {
+  .settings {
+    display: none;
+  }
+}
 
 .setting-left {
   display: flex;
@@ -242,7 +238,7 @@ button.setting {
 .playground {
   display: flex;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .playground {
     flex-direction: column;
   }
@@ -292,4 +288,9 @@ button.setting {
   font-family: source-code-pro, "source code pro", monospace;
   height: calc(100vh - 6em);
   direction: ltr;
+}
+@media screen and (max-width: 800px) {
+  .CodeMirror {
+    height: calc(50vh - 4em);
+  }
 }

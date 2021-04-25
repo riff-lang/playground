@@ -9,6 +9,7 @@
 @mixin subtle
   color: rgba(128, 128, 128, 0.7)
 
+$breakpoint: 800px
 :root
   --color-bg: #fff
   --color-fg: #000
@@ -45,10 +46,9 @@ body
     height: 45px
     path
       fill: var(--color-fg)
-  @media screen and (max-width: 600px)
-    margin-bottom: 0
-    svg
-      height: 60px
+  @media screen and (max-width: $breakpoint)
+    // svg
+    //   height: 60px
 
 .controls
   order: 2
@@ -133,6 +133,8 @@ button.run
   align-items: center
   margin: 0 0 0 1em
   transition: 0.05s all linear
+  @media screen and (max-width: $breakpoint)
+    display: none
 
 .setting-left
   display: flex
@@ -208,7 +210,7 @@ button.setting
   
 .playground
   display: flex
-  @media screen and (max-width: 600px)
+  @media screen and (max-width: $breakpoint)
     flex-direction: column
 
 .playground-left
@@ -252,3 +254,5 @@ button.setting
   +monospace
   height: calc(100vh - 6em)
   direction: ltr
+  @media screen and (max-width: $breakpoint)
+    height: calc(50vh - 4em)
