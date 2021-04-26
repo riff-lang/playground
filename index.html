@@ -100,12 +100,12 @@
             <button class='control run' onclick="riffExec(1);">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
   <path d="M28.42,12.58,4.848.387C2.933-.6,0,.358,0,2.807v24.38c0,2.2,2.726,3.521,4.848,2.42L28.42,17.42a2.643,2.643,0,0,0,0-4.84Z" transform="translate(0 -0.002)"/>
-</svg> Run
+</svg>
             </button>
-            <button class='control' onclick="riffExec(0);">
+            <button class='control disas' onclick="riffExec(0);">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 38.58">
   <path d="M673.812,395.191H660.955V378.048h12.857Zm-4.286-12.857h-4.286v8.571h4.286Zm0,30.009h4.286v4.286H660.955v-4.295h4.286v-8.571h-4.286v-4.286h8.571Zm17.143-21.429h4.286V395.2H678.1v-4.295h4.286v-8.571H678.1v-4.286h8.571Zm4.286,25.714H678.1V399.477h12.857Zm-4.286-12.857h-4.286v8.571h4.286v-8.571Z" transform="translate(-660.955 -378.048)"/>
-</svg> Disassemble
+</svg> 
             </button>
             <button class='help'>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
@@ -220,7 +220,19 @@
     </div>
     <div class='playground'>
         <div class='playground-left'>
-            <div class='playground-header'><div>Input</div></div>
+            <div class='playground-header'>
+                <div>Input</div>
+                <div class='input-dropwdown'>
+                    <select onchange='riffLoadSample(this.value);'>
+                        <option selected disabled>Sample Programs</option>
+                        <option value='hello'>Hello, World!</option>
+                        <option value='factorial'>Factorial</option>
+                        <option value='fibonacci'>Fibonacci</option>
+                        <option value='strings'>Strings</option>
+                        <option value='bitwise'>Bit manipulation</option>
+                    </select>
+                </div>
+            </div>
             <div class='playground-input'>
                 <textarea id='input'></textarea>
             </div>
