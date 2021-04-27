@@ -3,8 +3,9 @@
 @mixin monospace
   font-family: source-code-pro, 'source code pro', monospace
 
-@mixin calder
-  font-family: calder-dark, sans-serif
+@mixin display
+  font-family: acumin-pro-condensed, sans-serif
+  text-transform: uppercase
 
 @mixin subtle
   color: rgba(128, 128, 128, 0.7)
@@ -13,12 +14,39 @@
 $bp1: 850px
 $bp2: 425px
 
+// Simplified base16 variant
 :root
   --color-bg: #fff
   --color-fg: #333
+  --color-bg-abs: #fff
+  --color-fg-abs: #000
+  --color-comment: #999
+  --color-string: #f4bf75
+  --color-string-2: #d28445
+  --color-number: #aa759f
+  --color-operator: #333
+  --color-builtin: #6a9fb5
+  --color-atom: #aa759f
+  --color-keyword: #ac4142
+  --color-variable: #6a9fb5
+  --color-attribute: #6a9fb5
+  --color-selection: #e0e0e0
   @media (prefers-color-scheme: dark)
-    --color-bg: #111
-    --color-fg: #ddd
+    --color-bg: #151515
+    --color-fg: #ccc
+    --color-bg-abs: #000
+    --color-fg-abs: #fff
+    --color-comment: #666
+    --color-string: #f4bf75
+    --color-string-2: #d28445
+    --color-number: #aa759f
+    --color-operator: #ccc
+    --color-builtin: #6a9fb5
+    --color-atom: #aa759f
+    --color-keyword: #ac4142
+    --color-variable: #6a9fb5
+    --color-attribute: #6a9fb5
+    --color-selection: #333
 
 *
   font-feature-settings: 'zero' on
@@ -52,6 +80,12 @@ body
     height: 45px
     path
       fill: var(--color-fg)
+  a
+    &:hover
+      transition: 0.1s linear all
+      svg
+        path
+          fill: var(--color-fg-abs)
   @media screen and (max-width: $bp1)
     // svg
     //   height: 60px
@@ -60,70 +94,75 @@ body
   order: 2
   display: flex
   align-items: center
-  margin: 0 0 0 1em
 
 button.control
+  +display
+  font-weight: 700
   display: flex
   align-items: center
-  font-size: 1em
-  margin: 0 0 0 1em
+  font-size: 1.25em
+  margin: 0 0.25em
   position: relative
   color: var(--color-fg)
-  +calder
-  padding: 0.25em 1em 0.25em 0
+  padding: 0 0.5em 0.15em 0.5em
   cursor: pointer
   background: none
-  border: 3px solid var(--color-fg)
-  border-radius: 5px
+  border: 2px solid var(--color-fg)
+  border-radius: 3px
   svg
-    padding: 0 0.5em
+    padding: 0.15em 0.35em 0 0
     width: auto
     height: 20px
     path
       fill: var(--color-fg)
+  &:hover
+    transition: 0.1s linear all
+    color: var(--color-fg-abs)
+    border: 2px solid var(--color-fg-abs)
+    svg
+      path
+        transition: 0.1s linear all
+        fill: var(--color-fg-abs)
 
 button.help
   cursor: help
   position: relative
   border: none
   background: none
-  margin: 0 0.5em
-  padding: 0 0.2em
+  padding: 0.2em
   .tooltip
     +monospace
     width: 250px
     font-size: 1.1em
-    transition: 0.1s all linear
+    transition: 0.1s linear all
     visibility: hidden
     z-index: 10
     position: absolute
     color: var(--color-bg)
     background-color: var(--color-fg)
-    border-radius: 5px
+    border-radius: 3px
     padding: 0.5em 1em
     text-align: left
     top: 140%
-    right: -5px
+    left: -52px
     margin-left: -60px
     &::after
       content: " "
       position: absolute
       bottom: 100%
-      right: 5%
+      left: 50%
       margin-left: -5px
       border-width: 5px
       border-style: solid
       border-color: transparent transparent var(--color-fg) transparent 
   &:hover > .tooltip
     visibility: visible
-  // &:hover > .playground-dropdown
-  //   visibility: visible
   svg
     width: auto
     height: 20px
     path
       fill: var(--color-fg)
-  @media screen and (max-width: $bp1)
+  @media screen and (max-width: 350px)
     display: none
 
 button.run
@@ -136,94 +175,19 @@ button.run
       fill: var(--color-bg)
   &::after
     content: 'Run'
+  &:hover
+    color: var(--color-bg-abs)
+    background-color: var(--color-fg-abs)
+    svg
+      path
+        fill: var(--color-bg-abs)
 
 button.disas
   &::after
-    content: 'Disasssemble'
+    content: 'Disassemble'
     @media screen and (max-width: $bp2)
       content: 'Disas'
 
-.settings
-  order: 3
-  display: flex
-  align-items: center
-  margin: 0 0 0 1em
-  transition: 0.05s all linear
-  @media screen and (max-width: $bp1)
-    display: none
-
-.setting-left
-  display: flex
-  align-items: center
-  border: 3px solid var(--color-fg)
-  border-right: none
-  border-radius: 5px 0 0 5px
-  padding: 0.25em 1em 0.25em 0
-  svg
-    padding: 0 0.5em
-    width: auto
-    height: 20px
-    path
-      fill: var(--color-fg)
-
-.setting-right
-  display: flex
-  align-items: center
-  border: 3px solid var(--color-fg)
-  border-radius: 0 5px 5px 0
-  height: 36px
-  svg
-    padding: 0 0.5em
-    width: auto
-    height: 10px
-    path
-      fill: var(--color-fg)
-.dropdown
-  +monospace
-  top: 45px
-  right: 5px
-  display: none
-  position: absolute
-  max-height: 400px
-  // width: 200px
-  overflow-y: scroll
-  background-color: var(--color-fg)
-  text-align: left
-  z-index: 20
-  border-radius: 5px
-  color: var(--color-fg)
-  ul
-    margin: 0
-    padding: 0
-  li
-    list-style: none
-    a
-      padding: 0.2em 1em
-      display: block
-      color: var(--color-bg)
-      text-decoration: none
-      white-space: nowrap
-      &:hover
-        color: var(--color-fg)
-        background-color: var(--color-bg)
-
-.open
-  display: block
-
-.setting
-  position: relative
-button.setting
-  display: flex
-  align-items: center
-  font-size: 1em
-  position: relative
-  color: var(--color-fg)
-  +calder
-  cursor: pointer
-  background: none
-  border: none
-  border-radius: 5px
-  
 .playground
   display: flex
   @media screen and (max-width: $bp1)
@@ -236,27 +200,31 @@ button.setting
 .playground-right
   min-width: 50%
   order: 2
-  border-left: 3px solid var(--color-bg)
+  border-left: 2px solid rgba(128,128,128,0.3)
+  @media screen and (max-width: $bp1)
+    border: none
 
 .playground-header
-  padding: 0.25em
-  background-color: rgba(128,128,128,0.1)
+  font-size: 1.1em
+  font-weight: 700
+  padding: 0 0.5em
+  height: 30px
   display: flex
   align-items: center
   justify-content: space-between
+  border-top: 2px solid rgba(128,128,128,0.3)
+  border-bottom: 2px solid rgba(128,128,128,0.3)
   div
-    font-size: 0.85em
-    +calder
+    +display
   span
-    +calder
-  .input-dropdown
-    display: none
-    @media screen and (max-width: $bp1)
-      display: block
-
+    +display
+  .title
+    padding: 0 0 0.15em 0
 
 #metrics
   +monospace
+  text-transform: revert
+  font-weight: 400
   font-size: 0.75em
   padding: 0
 
@@ -266,14 +234,119 @@ button.setting
 .playground-output
   flex: 1
 
+.header-dropdown
+  position: relative
+  margin: 0 auto
+button.header-dropdown
+  +display
+  padding: 0 0 0.15em 0.5em
+  display: flex
+  align-items: center
+  font-size: 1em
+  font-weight: 700
+  position: relative
+  color: var(--color-fg)
+  cursor: pointer
+  background: none
+  border: none
+  border-left: 2px solid rgba(128,128,128,0.3)
+  svg
+    padding: 0 0 0 0.25em
+    width: auto
+    height: 8px
+    path
+      fill: var(--color-fg)
+  &:hover
+    transition: 0.1s linear all
+    color: var(--color-fg-abs)
+    svg
+      path
+        fill: var(--color-fg-abs)
+.dropdown
+  +monospace
+  top: 35px
+  right: -5px
+  display: none
+  position: absolute
+  max-height: 400px
+  overflow-y: scroll
+  background-color: var(--color-fg)
+  text-align: right
+  z-index: 20
+  border-radius: 3px
+  color: var(--color-fg)
+  ul
+    margin: 0
+    padding: 0
+  li
+    list-style: none
+    a
+      +monospace
+      text-transform: initial
+      font-weight: 400
+      padding: 0.2em 0.8em
+      display: block
+      color: var(--color-bg)
+      text-decoration: none
+      white-space: nowrap
+      &:hover
+        color: var(--color-fg)
+        background-color: var(--color-bg)
+
+.open
+  display: block
+
 // CodeMirror overrides
 
-// BASICS
-
-// Set height, width, borders, and global font properties here
 .CodeMirror
   +monospace
+  padding: 0 0.5em
   height: calc(100vh - 6em)
   direction: ltr
+  background: var(--color-bg)
+  color: var(--color-fg)
   @media screen and (max-width: $bp1)
     height: calc(50vh - 4em)
+
+// Syntax highlighting
+
+.cm-s-riff
+  .cm-comment
+    color: var(--color-comment)
+  .cm-string
+    color: var(--color-string)
+  .cm-string-2
+    color: var(--color-string-2)
+  .cm-number
+    color: var(--color-number)
+  .cm-operator
+    color: var(--color-operator)
+  .cm-builtin
+    color: var(--color-builtin)
+  .cm-atom
+    color: var(--color-atom)
+  .cm-keyword
+    color: var(--color-keyword)
+  .cm-variable
+    color: var(--color-fg)
+  .cm-attribute
+    color: var(--color-attribute)
+
+  .CodeMirror-cursor
+    border-left: 2px solid var(--color-fg)
+
+  .CodeMirror-gutters
+    border: none
+    background-color: var(--color-bg)
+  .CodeMirror-linenumber
+    color: var(--color-comment)
+  .CodeMirror-focused .CodeMirror-selected
+    background-color: var(--color-selection)
+  .CodeMirror-selected,
+  .CodeMirror-line::selection, .CodeMirror-line > span::selection,
+  .CodeMirror-line > span > span::selection
+    background-color: var(--color-selection)
+  .CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection,
+  .CodeMirror-line > span > span::-moz-selection
+    background-color: var(--color-selection)
+

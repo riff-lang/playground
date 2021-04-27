@@ -2,11 +2,37 @@
 :root {
   --color-bg: #fff;
   --color-fg: #333;
+  --color-bg-abs: #fff;
+  --color-fg-abs: #000;
+  --color-comment: #999;
+  --color-string: #f4bf75;
+  --color-string-2: #d28445;
+  --color-number: #aa759f;
+  --color-operator: #333;
+  --color-builtin: #6a9fb5;
+  --color-atom: #aa759f;
+  --color-keyword: #ac4142;
+  --color-variable: #6a9fb5;
+  --color-attribute: #6a9fb5;
+  --color-selection: #e0e0e0;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #111;
-    --color-fg: #ddd;
+    --color-bg: #151515;
+    --color-fg: #ccc;
+    --color-bg-abs: #000;
+    --color-fg-abs: #fff;
+    --color-comment: #666;
+    --color-string: #f4bf75;
+    --color-string-2: #d28445;
+    --color-number: #aa759f;
+    --color-operator: #ccc;
+    --color-builtin: #6a9fb5;
+    --color-atom: #aa759f;
+    --color-keyword: #ac4142;
+    --color-variable: #6a9fb5;
+    --color-attribute: #6a9fb5;
+    --color-selection: #333;
   }
 }
 
@@ -50,34 +76,50 @@ body {
 .logo svg path {
   fill: var(--color-fg);
 }
+.logo a:hover {
+  transition: 0.1s linear all;
+}
+.logo a:hover svg path {
+  fill: var(--color-fg-abs);
+}
 .controls {
   order: 2;
   display: flex;
   align-items: center;
-  margin: 0 0 0 1em;
 }
 
 button.control {
+  font-family: acumin-pro-condensed, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
   display: flex;
   align-items: center;
-  font-size: 1em;
-  margin: 0 0 0 1em;
+  font-size: 1.25em;
+  margin: 0 0.25em;
   position: relative;
   color: var(--color-fg);
-  font-family: calder-dark, sans-serif;
-  padding: 0.25em 1em 0.25em 0;
+  padding: 0 0.5em 0.15em 0.5em;
   cursor: pointer;
   background: none;
-  border: 3px solid var(--color-fg);
-  border-radius: 5px;
+  border: 2px solid var(--color-fg);
+  border-radius: 3px;
 }
 button.control svg {
-  padding: 0 0.5em;
+  padding: 0.15em 0.35em 0 0;
   width: auto;
   height: 20px;
 }
 button.control svg path {
   fill: var(--color-fg);
+}
+button.control:hover {
+  transition: 0.1s linear all;
+  color: var(--color-fg-abs);
+  border: 2px solid var(--color-fg-abs);
+}
+button.control:hover svg path {
+  transition: 0.1s linear all;
+  fill: var(--color-fg-abs);
 }
 
 button.help {
@@ -85,31 +127,30 @@ button.help {
   position: relative;
   border: none;
   background: none;
-  margin: 0 0.5em;
-  padding: 0 0.2em;
+  padding: 0.2em;
 }
 button.help .tooltip {
   font-family: source-code-pro, "source code pro", monospace;
   width: 250px;
   font-size: 1.1em;
-  transition: 0.1s all linear;
+  transition: 0.1s linear all;
   visibility: hidden;
   z-index: 10;
   position: absolute;
   color: var(--color-bg);
   background-color: var(--color-fg);
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 0.5em 1em;
   text-align: left;
   top: 140%;
-  right: -5px;
+  left: -52px;
   margin-left: -60px;
 }
 button.help .tooltip::after {
   content: " ";
   position: absolute;
   bottom: 100%;
-  right: 5%;
+  left: 50%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
@@ -125,7 +166,7 @@ button.help svg {
 button.help svg path {
   fill: var(--color-fg);
 }
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 350px) {
   button.help {
     display: none;
   }
@@ -145,114 +186,21 @@ button.run svg path {
 button.run::after {
   content: "Run";
 }
+button.run:hover {
+  color: var(--color-bg-abs);
+  background-color: var(--color-fg-abs);
+}
+button.run:hover svg path {
+  fill: var(--color-bg-abs);
+}
 
 button.disas::after {
-  content: "Disasssemble";
+  content: "Disassemble";
 }
 @media screen and (max-width: 425px) {
   button.disas::after {
     content: "Disas";
   }
-}
-
-.settings {
-  order: 3;
-  display: flex;
-  align-items: center;
-  margin: 0 0 0 1em;
-  transition: 0.05s all linear;
-}
-@media screen and (max-width: 850px) {
-  .settings {
-    display: none;
-  }
-}
-
-.setting-left {
-  display: flex;
-  align-items: center;
-  border: 3px solid var(--color-fg);
-  border-right: none;
-  border-radius: 5px 0 0 5px;
-  padding: 0.25em 1em 0.25em 0;
-}
-.setting-left svg {
-  padding: 0 0.5em;
-  width: auto;
-  height: 20px;
-}
-.setting-left svg path {
-  fill: var(--color-fg);
-}
-
-.setting-right {
-  display: flex;
-  align-items: center;
-  border: 3px solid var(--color-fg);
-  border-radius: 0 5px 5px 0;
-  height: 36px;
-}
-.setting-right svg {
-  padding: 0 0.5em;
-  width: auto;
-  height: 10px;
-}
-.setting-right svg path {
-  fill: var(--color-fg);
-}
-
-.dropdown {
-  font-family: source-code-pro, "source code pro", monospace;
-  top: 45px;
-  right: 5px;
-  display: none;
-  position: absolute;
-  max-height: 400px;
-  overflow-y: scroll;
-  background-color: var(--color-fg);
-  text-align: left;
-  z-index: 20;
-  border-radius: 5px;
-  color: var(--color-fg);
-}
-.dropdown ul {
-  margin: 0;
-  padding: 0;
-}
-.dropdown li {
-  list-style: none;
-}
-.dropdown li a {
-  padding: 0.2em 1em;
-  display: block;
-  color: var(--color-bg);
-  text-decoration: none;
-  white-space: nowrap;
-}
-.dropdown li a:hover {
-  color: var(--color-fg);
-  background-color: var(--color-bg);
-}
-
-.open {
-  display: block;
-}
-
-.setting {
-  position: relative;
-}
-
-button.setting {
-  display: flex;
-  align-items: center;
-  font-size: 1em;
-  position: relative;
-  color: var(--color-fg);
-  font-family: calder-dark, sans-serif;
-  cursor: pointer;
-  background: none;
-  border: none;
-  border-radius: 5px;
 }
 
 .playground {
@@ -272,34 +220,41 @@ button.setting {
 .playground-right {
   min-width: 50%;
   order: 2;
-  border-left: 3px solid var(--color-bg);
+  border-left: 2px solid rgba(128, 128, 128, 0.3);
+}
+@media screen and (max-width: 850px) {
+  .playground-right {
+    border: none;
+  }
 }
 
 .playground-header {
-  padding: 0.25em;
-  background-color: rgba(128, 128, 128, 0.1);
+  font-size: 1.1em;
+  font-weight: 700;
+  padding: 0 0.5em;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-top: 2px solid rgba(128, 128, 128, 0.3);
+  border-bottom: 2px solid rgba(128, 128, 128, 0.3);
 }
 .playground-header div {
-  font-size: 0.85em;
-  font-family: calder-dark, sans-serif;
+  font-family: acumin-pro-condensed, sans-serif;
+  text-transform: uppercase;
 }
 .playground-header span {
-  font-family: calder-dark, sans-serif;
+  font-family: acumin-pro-condensed, sans-serif;
+  text-transform: uppercase;
 }
-.playground-header .input-dropdown {
-  display: none;
-}
-@media screen and (max-width: 850px) {
-  .playground-header .input-dropdown {
-    display: block;
-  }
+.playground-header .title {
+  padding: 0 0 0.15em 0;
 }
 
 #metrics {
   font-family: source-code-pro, "source code pro", monospace;
+  text-transform: revert;
+  font-weight: 400;
   font-size: 0.75em;
   padding: 0;
 }
@@ -312,13 +267,145 @@ button.setting {
   flex: 1;
 }
 
+.header-dropdown {
+  position: relative;
+  margin: 0 auto;
+}
+
+button.header-dropdown {
+  font-family: acumin-pro-condensed, sans-serif;
+  text-transform: uppercase;
+  padding: 0 0 0.15em 0.5em;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  font-weight: 700;
+  position: relative;
+  color: var(--color-fg);
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-left: 2px solid rgba(128, 128, 128, 0.3);
+}
+button.header-dropdown svg {
+  padding: 0 0 0 0.25em;
+  width: auto;
+  height: 8px;
+}
+button.header-dropdown svg path {
+  fill: var(--color-fg);
+}
+button.header-dropdown:hover {
+  transition: 0.1s linear all;
+  color: var(--color-fg-abs);
+}
+button.header-dropdown:hover svg path {
+  fill: var(--color-fg-abs);
+}
+
+.dropdown {
+  font-family: source-code-pro, "source code pro", monospace;
+  top: 35px;
+  right: -5px;
+  display: none;
+  position: absolute;
+  max-height: 400px;
+  overflow-y: scroll;
+  background-color: var(--color-fg);
+  text-align: right;
+  z-index: 20;
+  border-radius: 3px;
+  color: var(--color-fg);
+}
+.dropdown ul {
+  margin: 0;
+  padding: 0;
+}
+.dropdown li {
+  list-style: none;
+}
+.dropdown li a {
+  font-family: source-code-pro, "source code pro", monospace;
+  text-transform: initial;
+  font-weight: 400;
+  padding: 0.2em 0.8em;
+  display: block;
+  color: var(--color-bg);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.dropdown li a:hover {
+  color: var(--color-fg);
+  background-color: var(--color-bg);
+}
+
+.open {
+  display: block;
+}
+
 .CodeMirror {
   font-family: source-code-pro, "source code pro", monospace;
+  padding: 0 0.5em;
   height: calc(100vh - 6em);
   direction: ltr;
+  background: var(--color-bg);
+  color: var(--color-fg);
 }
 @media screen and (max-width: 850px) {
   .CodeMirror {
     height: calc(50vh - 4em);
   }
+}
+
+.cm-s-riff .cm-comment {
+  color: var(--color-comment);
+}
+.cm-s-riff .cm-string {
+  color: var(--color-string);
+}
+.cm-s-riff .cm-string-2 {
+  color: var(--color-string-2);
+}
+.cm-s-riff .cm-number {
+  color: var(--color-number);
+}
+.cm-s-riff .cm-operator {
+  color: var(--color-operator);
+}
+.cm-s-riff .cm-builtin {
+  color: var(--color-builtin);
+}
+.cm-s-riff .cm-atom {
+  color: var(--color-atom);
+}
+.cm-s-riff .cm-keyword {
+  color: var(--color-keyword);
+}
+.cm-s-riff .cm-variable {
+  color: var(--color-fg);
+}
+.cm-s-riff .cm-attribute {
+  color: var(--color-attribute);
+}
+.cm-s-riff .CodeMirror-cursor {
+  border-left: 2px solid var(--color-fg);
+}
+.cm-s-riff .CodeMirror-gutters {
+  border: none;
+  background-color: var(--color-bg);
+}
+.cm-s-riff .CodeMirror-linenumber {
+  color: var(--color-comment);
+}
+.cm-s-riff .CodeMirror-focused .CodeMirror-selected {
+  background-color: var(--color-selection);
+}
+.cm-s-riff .CodeMirror-selected,
+.cm-s-riff .CodeMirror-line::selection, .cm-s-riff .CodeMirror-line > span::selection,
+.cm-s-riff .CodeMirror-line > span > span::selection {
+  background-color: var(--color-selection);
+}
+.cm-s-riff .CodeMirror-line::-moz-selection, .cm-s-riff .CodeMirror-line > span::-moz-selection,
+.cm-s-riff .CodeMirror-line > span > span::-moz-selection {
+  background-color: var(--color-selection);
 }
