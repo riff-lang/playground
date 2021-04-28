@@ -82,6 +82,7 @@ body {
 .logo a:hover svg path {
   fill: var(--color-fg-abs);
 }
+
 .controls {
   order: 2;
   display: flex;
@@ -89,23 +90,24 @@ body {
 }
 
 button.control {
-  font-family: acumin-pro-condensed, sans-serif;
+  font-family: rift, sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
   font-weight: 700;
   display: flex;
   align-items: center;
-  font-size: 1.25em;
+  font-size: 1.5em;
   margin: 0 0.25em;
   position: relative;
   color: var(--color-fg);
-  padding: 0 0.5em 0.15em 0.5em;
+  padding: 0 0.5em;
   cursor: pointer;
   background: none;
   border: 2px solid var(--color-fg);
   border-radius: 3px;
 }
 button.control svg {
-  padding: 0.15em 0.35em 0 0;
+  padding: 0 0.4em 0 0;
   width: auto;
   height: 20px;
 }
@@ -240,15 +242,14 @@ button.disas::after {
   border-bottom: 2px solid rgba(128, 128, 128, 0.3);
 }
 .playground-header div {
-  font-family: acumin-pro-condensed, sans-serif;
+  font-family: rift, sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
 }
 .playground-header span {
-  font-family: acumin-pro-condensed, sans-serif;
+  font-family: rift, sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
-}
-.playground-header .title {
-  padding: 0 0 0.15em 0;
 }
 
 #metrics {
@@ -273,13 +274,14 @@ button.disas::after {
 }
 
 button.header-dropdown {
-  font-family: acumin-pro-condensed, sans-serif;
+  font-family: rift, sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
-  padding: 0 0 0.15em 0.5em;
   display: flex;
   align-items: center;
   font-size: 1em;
   font-weight: 700;
+  padding-left: 0.75em;
   position: relative;
   color: var(--color-fg);
   cursor: pointer;
@@ -288,7 +290,7 @@ button.header-dropdown {
   border-left: 2px solid rgba(128, 128, 128, 0.3);
 }
 button.header-dropdown svg {
-  padding: 0 0 0 0.25em;
+  padding: 0 0 0 0.35em;
   width: auto;
   height: 8px;
 }

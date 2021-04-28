@@ -4,7 +4,8 @@
   font-family: source-code-pro, 'source code pro', monospace
 
 @mixin display
-  font-family: acumin-pro-condensed, sans-serif
+  font-family: rift, sans-serif
+  font-weight: 600
   text-transform: uppercase
 
 @mixin subtle
@@ -86,9 +87,6 @@ body
       svg
         path
           fill: var(--color-fg-abs)
-  @media screen and (max-width: $bp1)
-    // svg
-    //   height: 60px
 
 .controls
   order: 2
@@ -100,17 +98,17 @@ button.control
   font-weight: 700
   display: flex
   align-items: center
-  font-size: 1.25em
+  font-size: 1.5em
   margin: 0 0.25em
   position: relative
   color: var(--color-fg)
-  padding: 0 0.5em 0.15em 0.5em
+  padding: 0 0.5em
   cursor: pointer
   background: none
   border: 2px solid var(--color-fg)
   border-radius: 3px
   svg
-    padding: 0.15em 0.35em 0 0
+    padding: 0 0.4em 0 0
     width: auto
     height: 20px
     path
@@ -218,8 +216,8 @@ button.disas
     +display
   span
     +display
-  .title
-    padding: 0 0 0.15em 0
+  // .title
+  //   padding: 
 
 #metrics
   +monospace
@@ -239,11 +237,11 @@ button.disas
   margin: 0 auto
 button.header-dropdown
   +display
-  padding: 0 0 0.15em 0.5em
   display: flex
   align-items: center
   font-size: 1em
   font-weight: 700
+  padding-left: 0.75em
   position: relative
   color: var(--color-fg)
   cursor: pointer
@@ -251,7 +249,7 @@ button.header-dropdown
   border: none
   border-left: 2px solid rgba(128,128,128,0.3)
   svg
-    padding: 0 0 0 0.25em
+    padding: 0 0 0 0.35em
     width: auto
     height: 8px
     path
