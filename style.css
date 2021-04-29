@@ -4,6 +4,7 @@
   --color-fg: #333;
   --color-bg-abs: #fff;
   --color-fg-abs: #000;
+  --color-border: #aaa;
   --color-comment: #999;
   --color-string: #f4bf75;
   --color-string-2: #d28445;
@@ -22,6 +23,7 @@
     --color-fg: #ccc;
     --color-bg-abs: #000;
     --color-fg-abs: #fff;
+    --color-border: #555;
     --color-comment: #666;
     --color-string: #f4bf75;
     --color-string-2: #d28445;
@@ -76,10 +78,8 @@ body {
 .logo svg path {
   fill: var(--color-fg);
 }
-.logo a:hover {
-  transition: 0.1s linear all;
-}
-.logo a:hover svg path {
+.logo a:hover > svg path {
+  transition: fill 1s linear;
   fill: var(--color-fg-abs);
 }
 
@@ -115,12 +115,12 @@ button.control svg path {
   fill: var(--color-fg);
 }
 button.control:hover {
-  transition: 0.1s linear all;
+  transition: all 0.1s linear;
   color: var(--color-fg-abs);
   border: 2px solid var(--color-fg-abs);
 }
 button.control:hover svg path {
-  transition: 0.1s linear all;
+  transition: all 0.1s linear;
   fill: var(--color-fg-abs);
 }
 
@@ -135,7 +135,7 @@ button.help .tooltip {
   font-family: source-code-pro, "source code pro", monospace;
   width: 250px;
   font-size: 1.1em;
-  transition: 0.1s linear all;
+  transition: all 0.1s linear;
   visibility: hidden;
   z-index: 10;
   position: absolute;
@@ -222,7 +222,7 @@ button.disas::after {
 .playground-right {
   min-width: 50%;
   order: 2;
-  border-left: 2px solid rgba(128, 128, 128, 0.3);
+  border-left: 2px solid var(--color-border);
 }
 @media screen and (max-width: 850px) {
   .playground-right {
@@ -238,8 +238,8 @@ button.disas::after {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 2px solid rgba(128, 128, 128, 0.3);
-  border-bottom: 2px solid rgba(128, 128, 128, 0.3);
+  border-top: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
 }
 .playground-header div {
   font-family: rift, sans-serif;
@@ -287,7 +287,7 @@ button.header-dropdown {
   cursor: pointer;
   background: none;
   border: none;
-  border-left: 2px solid rgba(128, 128, 128, 0.3);
+  border-left: 2px solid var(--color-border);
 }
 button.header-dropdown svg {
   padding: 0 0 0 0.35em;
@@ -298,7 +298,7 @@ button.header-dropdown svg path {
   fill: var(--color-fg);
 }
 button.header-dropdown:hover {
-  transition: 0.1s linear all;
+  transition: all 0.1s linear;
   color: var(--color-fg-abs);
 }
 button.header-dropdown:hover svg path {

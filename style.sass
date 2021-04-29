@@ -8,9 +8,6 @@
   font-weight: 600
   text-transform: uppercase
 
-@mixin subtle
-  color: rgba(128, 128, 128, 0.7)
-
 // Breakpoints for screen width media queries
 $bp1: 850px
 $bp2: 425px
@@ -21,6 +18,7 @@ $bp2: 425px
   --color-fg: #333
   --color-bg-abs: #fff
   --color-fg-abs: #000
+  --color-border: #aaa
   --color-comment: #999
   --color-string: #f4bf75
   --color-string-2: #d28445
@@ -37,6 +35,7 @@ $bp2: 425px
     --color-fg: #ccc
     --color-bg-abs: #000
     --color-fg-abs: #fff
+    --color-border: #555
     --color-comment: #666
     --color-string: #f4bf75
     --color-string-2: #d28445
@@ -82,11 +81,9 @@ body
     path
       fill: var(--color-fg)
   a
-    &:hover
-      transition: 0.1s linear all
-      svg
-        path
-          fill: var(--color-fg-abs)
+    &:hover > svg path
+      transition: fill 1s linear
+      fill: var(--color-fg-abs)
 
 .controls
   order: 2
@@ -114,12 +111,12 @@ button.control
     path
       fill: var(--color-fg)
   &:hover
-    transition: 0.1s linear all
+    transition: all 0.1s linear
     color: var(--color-fg-abs)
     border: 2px solid var(--color-fg-abs)
     svg
       path
-        transition: 0.1s linear all
+        transition: all 0.1s linear
         fill: var(--color-fg-abs)
 
 button.help
@@ -132,7 +129,7 @@ button.help
     +monospace
     width: 250px
     font-size: 1.1em
-    transition: 0.1s linear all
+    transition: all 0.1s linear
     visibility: hidden
     z-index: 10
     position: absolute
@@ -198,7 +195,7 @@ button.disas
 .playground-right
   min-width: 50%
   order: 2
-  border-left: 2px solid rgba(128,128,128,0.3)
+  border-left: 2px solid var(--color-border)
   @media screen and (max-width: $bp1)
     border: none
 
@@ -210,8 +207,8 @@ button.disas
   display: flex
   align-items: center
   justify-content: space-between
-  border-top: 2px solid rgba(128,128,128,0.3)
-  border-bottom: 2px solid rgba(128,128,128,0.3)
+  border-top: 2px solid var(--color-border)
+  border-bottom: 2px solid var(--color-border)
   div
     +display
   span
@@ -247,7 +244,7 @@ button.header-dropdown
   cursor: pointer
   background: none
   border: none
-  border-left: 2px solid rgba(128,128,128,0.3)
+  border-left: 2px solid var(--color-border)
   svg
     padding: 0 0 0 0.35em
     width: auto
@@ -255,7 +252,7 @@ button.header-dropdown
     path
       fill: var(--color-fg)
   &:hover
-    transition: 0.1s linear all
+    transition: all 0.1s linear
     color: var(--color-fg-abs)
     svg
       path
