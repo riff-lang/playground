@@ -49,7 +49,7 @@ var Module = {
 };
 
 // Initialize with "Hello, World!"
-riffLoadSample('hello');
+loadSample('hello');
 
 // Riff code execution
 function riffExec(exec) {
@@ -83,7 +83,7 @@ function riffExec(exec) {
         // treating it as an error
         if (e.status != 0)
             document.getElementById('output-title').innerHTML =
-                '<span style="color:red";>Error</span>';
+                '<span style="color:#ac4142";>Error</span>';
         else
             document.getElementById('output-title').innerHTML =
                 'Output';
@@ -104,7 +104,7 @@ function revealDropdown(d) {
     document.getElementById(d).classList.toggle('open');
 }
 
-function riffLoadSample(sample) {
+function loadSample(sample) {
 
     // Clear the output textarea
     cmOutput.setValue('');
