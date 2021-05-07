@@ -31,8 +31,11 @@ headers/libraries to the WASM module.
 The following command is used to compile the C source code:
 
 ```bash
-$ emcc -O3 *.c -s EXPORTED_FUNCTIONS='["_wasm_main"]' -s EXPORTED_RUNTIME_METHODS='["ccall"]' -o bin/riff.js
+$ emcc -O3 *.c -s EXPORTED_FUNCTIONS='["_wasm_main"]' -s EXPORTED_RUNTIME_METHODS='["ccall"]' -o riff.js
 ```
+
+Emscripten outputs a JavaScript file along with the WASM module, which
+is used to drive the WASM module.
 
 `wasm_main()` is a [special entry
 point](https://github.com/riff-lang/riff/blob/1924e45cb9de4a34edcd844b2caa543ad4b35f4d/src/riff.c#L21)
