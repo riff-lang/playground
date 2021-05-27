@@ -1,13 +1,11 @@
-# Riff Studio
-
-[Riff Studio](https://play.riff.cx) is an online "playground" for
-[Riff](https://riff.cx), allowing you to write and execute Riff programs directly in the
-browser. Riff Studio is 100% client-side, using a special Riff
-interpreter compiled to WebAssembly to execute Riff programs.
+This repository contains source code for Riff's [standalone online
+playground](https://riff.run). The playground is 100% client-side,
+using a special Riff interpreter compiled to WebAssembly to execute
+Riff programs directly in the browser.
 
 ## Usage
 
-To run Riff Studio locally, you'll need to to spin up a local web
+To run the playground locally, you'll need to to spin up a local web
 server to serve `index.html`. Otherwise, the Riff interpreter
 (WebAssembly module) cannot be invoked via the `file://` protocol.
 
