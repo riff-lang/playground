@@ -1,24 +1,19 @@
-@import url("https://use.typekit.net/yjy6ajn.css")
+@import url("https://use.typekit.net/xiz7evu.css")
 
-@mixin monospace
-  font-family: source-code-pro, 'source code pro', monospace
+$color-dark: #1b1b1b
+$color-light: #fafafa
+$color-primary: #c94848
 
-@mixin display
-  font-family: rift, sans-serif
-  font-weight: 600
-  text-transform: uppercase
-
-// Breakpoints for screen width media queries
+// Breakpoint
 $bp1: 850px
-$bp2: 425px
 
 // Simplified base16 variant
 :root
-  --color-bg: #fff
+  color-scheme: light dark
+  --color-bg: #{$color-light}
   --color-fg: #333
   --color-bg-abs: #fff
   --color-fg-abs: #000
-  --color-border: #ccc
   --color-comment: #999
   --color-string: #f4bf75
   --color-string-2: #d28445
@@ -31,11 +26,10 @@ $bp2: 425px
   --color-attribute: #6a9fb5
   --color-selection: #e0e0e0
   @media (prefers-color-scheme: dark)
-    --color-bg: #151515
-    --color-fg: #ccc
+    --color-bg: #{darken($color-dark, 2%)}
+    --color-fg: #{darken($color-light, 20%)}
     --color-bg-abs: #000
     --color-fg-abs: #fff
-    --color-border: #333
     --color-comment: #666
     --color-string: #f4bf75
     --color-string-2: #d28445
@@ -49,6 +43,8 @@ $bp2: 425px
     --color-selection: #333
 
 *
+  font-family: source-code-pro, 'source code pro', monospace
+  font-weight: 400
   font-feature-settings: 'zero' on
   box-sizing: border-box
 
@@ -64,25 +60,39 @@ body
 
 .main
   display: flex
-  height: calc(100vh)
+  height: 100vh
   flex-direction: column
   
 .menu
-  margin: 0.5em
+  background-color: darken($color-light, 4%)
+  @media (prefers-color-scheme: dark)
+    background-color: $color-dark
+  padding: 0.5em
   display: flex
   align-items: center
   justify-content: space-between
+  button.control
+    background-color: darken($color-light, 10%)
+    @media (prefers-color-scheme: dark)
+      background-color: lighten($color-dark, 8%)
+    border: none
+    &:hover
+      background-color: darken($color-light, 15%)
+      @media (prefers-color-scheme: dark)
+        background-color: lighten($color-dark, 12%)
+      border: none
+
+// .submenu
 
 .logo
   order: 1
+  height: 45px
   svg
     width: auto
-    height: 45px
     path
       fill: var(--color-fg)
   a
     &:hover > svg path
-      transition: fill 1s linear
       fill: var(--color-fg-abs)
 
 .controls
@@ -91,160 +101,109 @@ body
   align-items: center
 
 button.control
-  +display
-  font-weight: 700
-  display: flex
-  align-items: center
-  font-size: 1.5em
-  margin: 0 0.25em
+  font-size: 0.9em
+  text-transform: uppercase
+  margin-left: 0.5em
   position: relative
   color: var(--color-fg)
-  padding: 0 0.5em
+  padding: 0.15em 0.65em
   cursor: pointer
   background: none
-  border: 2px solid var(--color-fg)
-  border-radius: 3px
-  svg
-    padding: 0 0.4em 0 0
-    width: auto
-    height: 20px
-    path
-      fill: var(--color-fg)
+  border: 1px solid var(--color-fg)
+  border-radius: 2px
   &:hover
     transition: all 0.1s linear
     color: var(--color-fg-abs)
-    border: 2px solid var(--color-fg-abs)
+    border: 1px solid var(--color-fg-abs)
     svg
       path
-        transition: all 0.1s linear
         fill: var(--color-fg-abs)
-
-button.help
-  cursor: help
-  position: relative
-  border: none
-  background: none
-  padding: 0.2em
-  .tooltip
-    +monospace
-    width: 250px
-    font-size: 1.1em
-    transition: all 0.1s linear
-    visibility: hidden
-    z-index: 10
-    position: absolute
-    color: var(--color-bg)
-    background-color: var(--color-fg)
-    border-radius: 3px
-    padding: 0.5em 1em
-    text-align: left
-    top: 140%
-    left: -52px
-    margin-left: -60px
-    &::after
-      content: " "
-      position: absolute
-      bottom: 100%
-      left: 50%
-      margin-left: -5px
-      border-width: 5px
-      border-style: solid
-      border-color: transparent transparent var(--color-fg) transparent 
-  &:hover > .tooltip
-    visibility: visible
   svg
+    padding: 0 0 0 0.5em
     width: auto
-    height: 20px
+    height: 7px
     path
       fill: var(--color-fg)
-  @media screen and (max-width: 350px)
-    display: none
 
 button.run
   background-color: var(--color-fg)
   color: var(--color-bg)
-  svg
-    width: auto
-    height: 16px
-    path
-      fill: var(--color-bg)
-  &::after
-    content: 'Run'
   &:hover
     color: var(--color-bg-abs)
     background-color: var(--color-fg-abs)
-    svg
-      path
-        fill: var(--color-bg-abs)
 
-button.disas
-  &::after
-    content: 'Disassemble'
-    @media screen and (max-width: $bp2)
-      content: 'Disas'
+#link-group
+  display: none
+  margin: 0 0.35em
 
+input.share-url
+  color: var(--color-fg)
+  background-color: var(--color-bg)
+  border: none
+  margin: 0 auto
+  padding-left: 1em
+  display: table-cell
+  border-right: none
+  border-radius: 2px 0 0 2px
+  width: 600px
+  @media screen and (max-width: $bp1)
+    width: calc(100vw - 250px)
+
+button.copy
+  margin: 0 auto
+  border-radius: 0 2px 2px 0
+  
 .playground
+  height: calc(100vh - 61px)
   display: flex
   @media screen and (max-width: $bp1)
     flex-direction: column
 
-.playground-left
-  min-width: 50%
-  order: 1
-
-.playground-right
-  min-width: 50%
-  order: 2
-  border-left: 2px solid var(--color-border)
-  @media screen and (max-width: $bp1)
-    border: none
-
 .playground-header
-  font-size: 1.1em
-  font-weight: 700
-  padding: 0 0.5em
-  height: 30px
+  font-size: 0.9em
+  padding: 0.5em
+  text-transform: uppercase
   display: flex
   align-items: center
   justify-content: space-between
-  border-top: 2px solid var(--color-border)
-  border-bottom: 2px solid var(--color-border)
-  div
-    +display
-  span
-    +display
-  // .title
-  //   padding: 
+  height: 36px
+  button.control
+    padding: 0 0.65em
 
 #metrics
-  +monospace
-  text-transform: revert
-  font-weight: 400
+  text-transform: initial
   font-size: 0.75em
   padding: 0
 
 .playground-input
-  flex: 1
+  min-width: 50%
+  order: 1
 
 .playground-output
-  flex: 1
+  border-left: 2px solid darken($color-light, 10%)
+  @media (prefers-color-scheme: dark)
+    border-left: 2px solid lighten($color-dark, 2%)
+  min-width: 50%
+  order: 2
+  @media screen and (max-width: $bp1)
+    border-left: none
+    border-top: 2px solid darken($color-light, 10%)
+    @media (prefers-color-scheme: dark)
+      border-top: 2px solid lighten($color-dark, 2%)
 
 .header-dropdown
   position: relative
   margin: 0 auto
 button.header-dropdown
-  +display
   display: flex
   align-items: center
   font-size: 1em
-  font-weight: 700
   padding-left: 0.75em
   position: relative
   color: var(--color-fg)
   cursor: pointer
   background: none
   border: none
-  border-left: 2px solid var(--color-border)
   svg
     padding: 0 0 0 0.35em
     width: auto
@@ -258,17 +217,18 @@ button.header-dropdown
       path
         fill: var(--color-fg-abs)
 .dropdown
-  +monospace
   top: 35px
-  right: -5px
+  right: 0px
   display: none
   position: absolute
   max-height: 400px
   overflow-y: scroll
-  background-color: var(--color-fg)
+  background-color: darken($color-light, 10%)
+  @media (prefers-color-scheme: dark)
+    background-color: lighten($color-dark, 8%)
   text-align: right
   z-index: 20
-  border-radius: 3px
+  border-radius: 2px
   color: var(--color-fg)
   ul
     margin: 0
@@ -276,17 +236,17 @@ button.header-dropdown
   li
     list-style: none
     a
-      +monospace
       text-transform: initial
-      font-weight: 400
       padding: 0.2em 0.8em
       display: block
-      color: var(--color-bg)
+      color: var(--color-fg)
       text-decoration: none
       white-space: nowrap
       &:hover
-        color: var(--color-fg)
-        background-color: var(--color-bg)
+        color: var(--color-fg-abs)
+        background-color: darken($color-light, 15%)
+        @media (prefers-color-scheme: dark)
+          background-color: lighten($color-dark, 12%)
 
 .open
   display: block
@@ -294,14 +254,13 @@ button.header-dropdown
 // CodeMirror overrides
 
 .CodeMirror
-  +monospace
   padding: 0 0.5em
-  height: calc(100vh - 6em)
+  height: calc(100vh - 101px)
   direction: ltr
   background: var(--color-bg)
   color: var(--color-fg)
   @media screen and (max-width: $bp1)
-    height: calc(50vh - 4em)
+    height: calc(50vh - 68px)
 
 // Syntax highlighting
 

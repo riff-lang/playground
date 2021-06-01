@@ -33,14 +33,12 @@ var Module = {
     noInitialRun: true,
     noExitRuntime: true,
     print: function(text) {
-        var element = document.getElementById('output');
         console.log(text);
-        element.value += text + "\n";
+        document.getElementById('output').value += text + "\n";
     },
     printErr: function(text) {
-        var element = document.getElementById('output');
         console.error(text);
-        element.value += text + "\n";
+        document.getElementById('output').value += text + "\n";
     },
     totalDependencies: 0,
     monitorRunDependencies: function(left) {
@@ -48,8 +46,12 @@ var Module = {
     }
 };
 
-// Initialize with "Hello, World!"
-loadSample('hello');
+init();
+
+cmInput.on('change', function() {
+    document.getElementById('share-button').style.display = 'block';
+    document.getElementById('link-group').style.display = 'none';
+});
 
 // Riff code execution
 function riffExec(exec) {
@@ -77,10 +79,11 @@ function riffExec(exec) {
         else
             document.getElementById('output-title').innerHTML =
                 'Output';
-    } catch (e) {
+    }
 
-        // This allows Riff programs to `exit` without Emscripten
-        // treating it as an error
+    // This allows Riff programs to `exit` without Emscripten
+    // treating it as an error
+    catch (e) {
         if (e.status != 0)
             document.getElementById('output-title').innerHTML =
                 '<span style="color:#ac4142";>Error</span>';
@@ -112,4 +115,69 @@ function loadSample(sample) {
     var s = riffSamples[sample];
     if (s != null)
         cmInput.setValue(s);
+}
+
+function inflate(byteString) {
+    return byteArrayToByteString(pako.inflateRaw(byteString, { 'level': 9 }));
+}
+
+function deflate(byteString) {
+    return pako.deflateRaw(byteStringToByteArray(byteString), { 'level': 9 });
+}
+
+function base64ToByteString(base64String) {
+    return atob(unescape(base64String).replace(/@|-/g, "+").replace(/_/g, "/"));
+}
+
+function byteStringToByteArray(byteString) {
+    var byteArray = new Uint8Array(byteString.length);
+    for (var index = 0; index < byteString.length; index++)
+        byteArray[index] = byteString.charCodeAt(index);
+    byteArray.head = 0;
+    return byteArray;
+}
+
+function byteStringToBase64(byteString) {
+    return btoa(byteString).replace(/\+/g, "@").replace(/=+/, "");
+}
+
+function iterate(iterable, monad) {
+    if (!iterable) return;
+    for (var i = 0; i < iterable.length; i++)
+        monad(iterable[i]);
+}
+
+function byteArrayToByteString(byteArray) {
+    var retval = '';
+    iterate(byteArray, function(byte) { retval += String.fromCharCode(byte); });
+    return retval
+}
+
+function createShareLink() {
+    document.getElementById('share-button').style.display = 'none';
+    document.getElementById('link-group').style.display = 'flex';
+
+    var src = cmInput.getValue();
+    var cmp = byteStringToBase64(byteArrayToByteString(deflate(src)));
+    document.getElementById('share-url').value =
+        location.protocol + '//' + location.host + location.pathname + '#' + cmp;
+}
+
+function copyToClipboard() {
+    document.querySelector('#share-url').select();
+    document.execCommand('copy');
+}
+
+function init() {
+    if (location.hash === '') {
+        loadSample('hello');
+    } else {
+        var hash = unescape(location.hash.substr(1));
+        try {
+            var src = inflate(base64ToByteString(hash));
+            // console.log(src);
+            cmInput.setValue(src);
+        } catch (e) {
+        }
+    }
 }

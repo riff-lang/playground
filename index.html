@@ -12,119 +12,67 @@
 <script src="lib/simple.js"></script>
 <script src="lib/riff.js"></script>
 <script src="lib/riff-samples.js"></script>
+<script src="lib/pako.min.js"></script>
 </head>
 <body>
 <div class="main">
-    <div class='menu'>
-    <div class='logo'>
-        <a href="https://riff.cx">
-                <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 119.737 92.314" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-<g transform="translate(-77.989 -124.255)">
-<g transform="translate(77.989 124.255)">
-  <g transform="translate(58.812)">
-    <g>
-      <path d="M277.1,142.293a3.39,3.39,0,0,0-.667,2.019v70.2a2.031,2.031,0,0,0,2.032,2.031l11.143-.007a2.034,2.034,0,0,0,1.5-.662l4.723-5.177a1.354,1.354,0,0,0-1-2.266l-2.978-.006a1.354,1.354,0,0,1-1.351-1.354V158.477a1.354,1.354,0,0,1,1.293-1.353l2.546-.115a1.352,1.352,0,0,0,1.185-.822l3.559-8.374a1.354,1.354,0,0,0-1.24-1.883l-5.994-.026a1.353,1.353,0,0,1-1.349-1.354v-5.391a1.354,1.354,0,0,1,1.353-1.354l9.316-.012a2.031,2.031,0,0,0,1.667-.873c1.459-2.1,5.207-7.508,7.3-10.529a1.354,1.354,0,0,0-1.112-2.125l-16.823-.01a3.386,3.386,0,0,0-2.718,1.366Z" transform="translate(-276.437 -124.255)" fill-rule="evenodd"/>
-    </g>
-  </g>
-  <g transform="translate(40.051 26.364)">
-  <g>
-      <path id="Path_13" data-name="Path 13" d="M213.132,226.39a3.383,3.383,0,0,1,1.035-2.436l10.741-10.361a1.354,1.354,0,0,1,2.294.974v62.541a2.03,2.03,0,0,1-2.03,2.031l-10.008,0a2.031,2.031,0,0,1-2.032-2.031C213.132,268.989,213.132,233.33,213.132,226.39Z" transform="translate(-213.131 -213.214)" fill-rule="evenodd"/>
-    </g>
-  </g>
-  <g transform="translate(0 15.641)">
-      <g>
-      <path id="Path_14" data-name="Path 14" d="M78.816,192.322a3.385,3.385,0,0,0-.827,2.217v57.108a2.03,2.03,0,0,0,2.025,2.031l10.543.026a3.385,3.385,0,0,0,2.511-1.105l4.327-4.753a1.354,1.354,0,0,0-1-2.266l-2.994-.012a1.354,1.354,0,0,1-1.348-1.354c0-7.08,0-45.531,0-52.571a1.353,1.353,0,0,1,1.332-1.353c2.048-.034,4.839-.1,6.914-.133a1.354,1.354,0,0,1,1.376,1.353v10.779a1.354,1.354,0,0,0,2.291.977l9.8-9.391a2.029,2.029,0,0,0,.626-1.466V179.062a2.03,2.03,0,0,0-2.032-2.031l-18.76.014a3.384,3.384,0,0,0-2.555,1.168Z" transform="translate(-77.989 -177.031)" fill-rule="evenodd"/>
-    </g>
-  </g>
-  <g transform="translate(41.021 2.302)">
-  <g>
-      <path id="Path_15" data-name="Path 15" d="M230.474,133.378a1.354,1.354,0,0,0-2.309-.96l-11.363,11.3a1.356,1.356,0,0,0-.4.96V157.11a1.354,1.354,0,0,0,2.309.959l11.362-11.3a1.354,1.354,0,0,0,.4-.96Z" transform="translate(-216.404 -132.024)" fill-rule="evenodd"/>
-    </g>
-  </g>
-</g>
-<g transform="translate(163.777 124.255)">
-<g>
-    <path id="Path_16" data-name="Path 16" d="M368.127,142.293a3.389,3.389,0,0,0-.667,2.019v70.2a2.03,2.03,0,0,0,2.032,2.031l11.142-.007a2.034,2.034,0,0,0,1.5-.662l4.723-5.177a1.354,1.354,0,0,0-1-2.266l-2.978-.006a1.354,1.354,0,0,1-1.351-1.354V158.477a1.354,1.354,0,0,1,1.293-1.353l2.546-.115a1.353,1.353,0,0,0,1.185-.822l3.559-8.374a1.354,1.354,0,0,0-1.24-1.883l-5.994-.026a1.353,1.353,0,0,1-1.348-1.354v-5.391a1.354,1.354,0,0,1,1.353-1.354l9.316-.012a2.031,2.031,0,0,0,1.667-.873c1.46-2.1,5.207-7.508,7.3-10.529a1.353,1.353,0,0,0-1.111-2.125l-16.823-.01a3.385,3.385,0,0,0-2.719,1.366Z" transform="translate(-367.46 -124.255)" fill-rule="evenodd"/>
-  </g>
-</g>
-</g>
-</svg></a>
+  <div class='menu'>
+  <div class='logo'>
+    <a href="https://riff.cx">
+      <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 119.737 92.314" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="translate(-77.989 -124.255)"><g transform="translate(77.989 124.255)"><g transform="translate(58.812)"><g><path d="M277.1,142.293a3.39,3.39,0,0,0-.667,2.019v70.2a2.031,2.031,0,0,0,2.032,2.031l11.143-.007a2.034,2.034,0,0,0,1.5-.662l4.723-5.177a1.354,1.354,0,0,0-1-2.266l-2.978-.006a1.354,1.354,0,0,1-1.351-1.354V158.477a1.354,1.354,0,0,1,1.293-1.353l2.546-.115a1.352,1.352,0,0,0,1.185-.822l3.559-8.374a1.354,1.354,0,0,0-1.24-1.883l-5.994-.026a1.353,1.353,0,0,1-1.349-1.354v-5.391a1.354,1.354,0,0,1,1.353-1.354l9.316-.012a2.031,2.031,0,0,0,1.667-.873c1.459-2.1,5.207-7.508,7.3-10.529a1.354,1.354,0,0,0-1.112-2.125l-16.823-.01a3.386,3.386,0,0,0-2.718,1.366Z" transform="translate(-276.437 -124.255)" fill-rule="evenodd"/></g></g><g transform="translate(40.051 26.364)"><g><path id="Path_13" data-name="Path 13" d="M213.132,226.39a3.383,3.383,0,0,1,1.035-2.436l10.741-10.361a1.354,1.354,0,0,1,2.294.974v62.541a2.03,2.03,0,0,1-2.03,2.031l-10.008,0a2.031,2.031,0,0,1-2.032-2.031C213.132,268.989,213.132,233.33,213.132,226.39Z" transform="translate(-213.131 -213.214)" fill-rule="evenodd"/></g></g><g transform="translate(0 15.641)"><g><path id="Path_14" data-name="Path 14" d="M78.816,192.322a3.385,3.385,0,0,0-.827,2.217v57.108a2.03,2.03,0,0,0,2.025,2.031l10.543.026a3.385,3.385,0,0,0,2.511-1.105l4.327-4.753a1.354,1.354,0,0,0-1-2.266l-2.994-.012a1.354,1.354,0,0,1-1.348-1.354c0-7.08,0-45.531,0-52.571a1.353,1.353,0,0,1,1.332-1.353c2.048-.034,4.839-.1,6.914-.133a1.354,1.354,0,0,1,1.376,1.353v10.779a1.354,1.354,0,0,0,2.291.977l9.8-9.391a2.029,2.029,0,0,0,.626-1.466V179.062a2.03,2.03,0,0,0-2.032-2.031l-18.76.014a3.384,3.384,0,0,0-2.555,1.168Z" transform="translate(-77.989 -177.031)" fill-rule="evenodd"/></g></g><g transform="translate(41.021 2.302)"><g><path id="Path_15" data-name="Path 15" d="M230.474,133.378a1.354,1.354,0,0,0-2.309-.96l-11.363,11.3a1.356,1.356,0,0,0-.4.96V157.11a1.354,1.354,0,0,0,2.309.959l11.362-11.3a1.354,1.354,0,0,0,.4-.96Z" transform="translate(-216.404 -132.024)" fill-rule="evenodd"/></g></g></g><g transform="translate(163.777 124.255)"><g><path id="Path_16" data-name="Path 16" d="M368.127,142.293a3.389,3.389,0,0,0-.667,2.019v70.2a2.03,2.03,0,0,0,2.032,2.031l11.142-.007a2.034,2.034,0,0,0,1.5-.662l4.723-5.177a1.354,1.354,0,0,0-1-2.266l-2.978-.006a1.354,1.354,0,0,1-1.351-1.354V158.477a1.354,1.354,0,0,1,1.293-1.353l2.546-.115a1.353,1.353,0,0,0,1.185-.822l3.559-8.374a1.354,1.354,0,0,0-1.24-1.883l-5.994-.026a1.353,1.353,0,0,1-1.348-1.354v-5.391a1.354,1.354,0,0,1,1.353-1.354l9.316-.012a2.031,2.031,0,0,0,1.667-.873c1.46-2.1,5.207-7.508,7.3-10.529a1.353,1.353,0,0,0-1.111-2.125l-16.823-.01a3.385,3.385,0,0,0-2.719,1.366Z" transform="translate(-367.46 -124.255)" fill-rule="evenodd"/></g></g></g></svg>
+    </a>
+  </div>
+  <div class='controls'>
+    <button class='control' id='share-button' onclick='createShareLink();'>Share</button>
+    <div id='link-group'>
+      <input readonly type='text' class='share-url' id='share-url'></input>
+      <button class='control copy' onclick='copyToClipboard();'>Copy</button>
     </div>
-        <div class='controls'>
-            <button class='help'>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-  <path d="M30.563,15.562a15,15,0,1,1-15-15A15,15,0,0,1,30.563,15.562Zm-14.6-10.04A7.834,7.834,0,0,0,8.916,9.379a.727.727,0,0,0,.164.983l2.1,1.591a.726.726,0,0,0,1.008-.128c1.08-1.37,1.821-2.165,3.466-2.165,1.236,0,2.764.8,2.764,1.993,0,.906-.748,1.371-1.968,2.055-1.423.8-3.306,1.79-3.306,4.274v.242a.726.726,0,0,0,.726.726h3.387a.726.726,0,0,0,.726-.726v-.081c0-1.721,5.031-1.793,5.031-6.452C23.013,8.183,19.374,5.522,15.965,5.522Zm-.4,15A2.782,2.782,0,1,0,18.345,23.3,2.785,2.785,0,0,0,15.562,20.522Z" transform="translate(-0.563 -0.563)"/>
-</svg>
-                <span class='tooltip'>
-                    Compile the program and print the disassembled
-                    bytecode.
-                    <br>
-                    <br>
-                    The bytecode format is proprietary to the Riff
-                    virtual machine. Corresponding mnemonics are
-                    arbitrary and only useful for debugging purposes.
-                </span>
-            </button>
-            <button class='control disas' onclick="riffExec(0);">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 38.58">
-  <path d="M673.812,395.191H660.955V378.048h12.857Zm-4.286-12.857h-4.286v8.571h4.286Zm0,30.009h4.286v4.286H660.955v-4.295h4.286v-8.571h-4.286v-4.286h8.571Zm17.143-21.429h4.286V395.2H678.1v-4.295h4.286v-8.571H678.1v-4.286h8.571Zm4.286,25.714H678.1V399.477h12.857Zm-4.286-12.857h-4.286v8.571h4.286v-8.571Z" transform="translate(-660.955 -378.048)"/>
-</svg> 
-            </button>
-            <button class='control run' onclick="riffExec(1);">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.002 22.501">
-  <path d="M9,7.334V28.666a.549.549,0,0,0,.823.506l16.91-10.666a.6.6,0,0,0,0-1.005L9.823,6.834A.544.544,0,0,0,9,7.334Z" transform="translate(-9 -6.751)"/>
-</svg>
-            </button>
-        </div>
+    <button class='control' onclick="revealDropdown('samples-dropdown');">Samples<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.992 8"><path d="M13.186,16.835l5.291-5.295a1,1,0,0,1,1.412,0,1.008,1.008,0,0,1,0,1.416l-5.995,6a1,1,0,0,1-1.379.029L6.479,12.961a1,1,0,0,1,1.412-1.416Z" transform="translate(-6.188 -11.246)"/></svg>
+    <div class='dropdown' id='samples-dropdown'>
+      <ul>
+        <li><a href="javascript:loadSample('hello');">
+          Hello, World!
+        </a></li>
+        <li><a href="javascript:loadSample('factorial');">
+          Factorial
+        </a></li>
+        <li><a href="javascript:loadSample('fibonacci');">
+          Fibonacci
+        </a></li>
+        <li><a href="javascript:loadSample('md5');">
+          MD5 digest
+        </a></li>
+        <li><a href="javascript:loadSample('strings');">
+          Strings
+        </a></li>
+        <li><a href="javascript:loadSample('bitwise');">
+          Bit manipulation
+        </a></li>
+      </ul>
     </div>
-    <div class='playground'>
-        <div class='playground-left'>
-            <div class='playground-header'>
-                <div class='title'>Input</div>
-                <div>
-                    <button class='header-dropdown' onclick="revealDropdown('samples-dropdown');">Samples
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.992 8">
-  <path d="M13.186,16.835l5.291-5.295a1,1,0,0,1,1.412,0,1.008,1.008,0,0,1,0,1.416l-5.995,6a1,1,0,0,1-1.379.029L6.479,12.961a1,1,0,0,1,1.412-1.416Z" transform="translate(-6.188 -11.246)"/>
-</svg>
-            <div class='dropdown' id='samples-dropdown'>
-                <ul>
-                    <li><a href="javascript:loadSample('hello');">
-                            Hello, World!
-                        </a></li>
-                    <li><a href="javascript:loadSample('factorial');">
-                            Factorial
-                        </a></li>
-                    <li><a href="javascript:loadSample('fibonacci');">
-                            Fibonacci
-                        </a></li>
-                    <li><a href="javascript:loadSample('md5');">
-                            MD5 digest
-                        </a></li>
-                    <li><a href="javascript:loadSample('strings');">
-                            Strings
-                        </a></li>
-                    <li><a href="javascript:loadSample('bitwise');">
-                            Bit manipulation
-                        </a></li>
-                </ul>
-            </div>
-            </button>
-            </div>
-            </div>
-            <div class='playground-input'>
-                <textarea id='input'></textarea>
-            </div>
-        </div>
-        <div class='playground-right'>
-            <div class='playground-header'>
-                <div class='title' id='output-title'>Output</div>
-                <div id='metrics'></div>
-            </div>
-            <div class='playground-output'>
-                <textarea id='output' readonly></textarea>
-            </div>
-        </div>
+    </button>
+  </div>
+</div>
+<div class='playground'>
+  <div class='playground-input'>
+    <div class='playground-header'>
+      <div>Source</div>
+      <div class='controls'>
+        <button class='control' onclick="riffExec(0);">Disassemble</button>
+        <button class='control run' onclick="riffExec(1);">Run</button>
+      </div>
     </div>
+    <textarea id='input'></textarea>
+  </div>
+  <div class='playground-output'>
+    <div class='playground-header'>
+      <div id='output-title'>Output</div>
+      <div id='metrics'></div>
+    </div>
+    <textarea id='output' readonly></textarea>
+  </div>
+</div>
 </div>
 <script async type='text/javascript' src='playground.js'></script>
 <script async type='text/javascript' src='riff.js'></script>
