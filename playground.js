@@ -100,7 +100,7 @@ function riffExec(exec) {
     var execTime = Date.now() - start;
     console.log('Runtime: ' + (execTime / 1000));
     document.getElementById('metrics').innerHTML =
-        'riff 0.1a / ' + (execTime / 1000) + 's';
+        'riff 0.1 / ' + (execTime / 1000) + 's';
 }
 
 function revealDropdown(d) {
