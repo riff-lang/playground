@@ -26,10 +26,17 @@ var cmOutput = CodeMirror.fromTextArea(document.getElementById('output'), {
 
 // Emscripten Module object
 var Module = {
-    preRun: [],
-    postRun: [],
     noInitialRun: true,
     noExitRuntime: true,
+    onRuntimeInitialized: function() {
+        try {
+            this.riffVersion = ccall('riff_version', 'string', null, null);
+            console.log('Riff interpreter version detected: ' + this.riffVersion);
+        } catch (e) {
+            console.error('Error detecting Riff interpreter version');
+            this.riffVersion = '';
+        }
+    },
     print: function(text) {
         console.log(text);
         document.getElementById('output').value += text + "\n";
@@ -38,10 +45,6 @@ var Module = {
         console.error(text);
         document.getElementById('output').value += text + "\n";
     },
-    totalDependencies: 0,
-    monitorRunDependencies: function(left) {
-        this.totalDependencies = Math.max(this.totalDependencies, left);
-    }
 };
 
 init();
@@ -68,9 +71,7 @@ function riffExec(exec) {
 
     // Invoke the Riff interpreter with the input program.  This calls a special
     // wasm_main() function in riff.c
-    try {
-        Module.ccall('wasm_main', 'number', ['number', 'string'],
-            [exec, inputProgram]);
+    try { Module.ccall('riff_main', 'number', ['number', 'string'], [exec, inputProgram]);
         if (exec == 0)
             document.getElementById('output-title').innerHTML =
                 'Disassembly';
@@ -98,7 +99,7 @@ function riffExec(exec) {
     cmOutput.setValue(document.getElementById('output').value);
     console.log('Runtime: ' + (execTime / 1000));
     document.getElementById('metrics').innerHTML =
-        'riff 0.3.2 / ' + (execTime / 1000) + 's';
+        'riff ' + Module.riffVersion + ' / ' + (execTime / 1000) + 's';
 }
 
 function revealDropdown(d) {
@@ -173,7 +174,7 @@ function init() {
         var hash = unescape(location.hash.substr(1));
         try {
             var src = inflate(base64ToByteString(hash));
-            // console.log(src);
+            console.log(src);
             cmInput.setValue(src);
         } catch (e) {
         }
