@@ -15,7 +15,7 @@ fn fact(n) {
 }
 
 for i in 12
-  printf("factorial(%d) = %d\\n", i, fact(i))`,
+  print("factorial(#i) = #{fact(i)}")`,
 
 // Recursive Fibonacci
 'fibonacci':
@@ -25,7 +25,7 @@ fn fib(n) {
 }
 
 for i in 0..19
-  printf("fibonacci(%d) = %d\\n", i, fib(i))`,
+  print("fibonacci(#i) = #{fib(i)}")`,
 
 // Bit manipulation
 'bitwise':
@@ -47,8 +47,8 @@ fn popcount(x) {
   return x & 0x7f
 }
 
-for i in { 0, 1, 0xFF }
-  printf("popcount(%d) = %d\\n", i, popcount(i))
+for i in [0, 1, 0xFF]
+  print("popcount(#i) = #{popcount(i)}")
 
 // Count the number of trailing zero bits in an integer
 fn tzcount(x) {
@@ -61,8 +61,8 @@ fn tzcount(x) {
     - (((x & -x) & 0x5555_5555_5555_5555) ?  1 : 0)
 }
 
-for i in { 1, 2, 32 }
-  printf("tzcount(%d) = %d\\n", i, tzcount(i))
+for i in [1, 2, 32]
+  print("tzcount(#i) = #{tzcount(i)}")
 
 // Swap bytes n and m in integer x
 fn byteswap(x, n, m) {
@@ -149,7 +149,7 @@ fn md5(msg) {
   bytes[#msg] = 0x80
 
   // Pad the message with zeros
-  while #bytes & 63 != 56 {
+  while #bytes & 0x3f != 0x38 {
     bytes[#bytes] = 0
   }
 
@@ -218,7 +218,8 @@ test_strings = {
 }
 
 for s in test_strings {
-  printf("Message: %s\\nMD5:     %s\\n", s, md5(s))
+  print("Message: #s")
+  print("MD5:     #{md5(s)}")
 }`
 
 };
