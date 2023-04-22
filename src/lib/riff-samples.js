@@ -32,17 +32,15 @@ for i in 0..19
 `// Population count
 // Count the number of bits set in an integer
 fn popcount(x) {
-  local m1 = 0x5555_5555_5555_5555
-  local m2 = 0x3333_3333_3333_3333
-  local m3 = 0x0F0F_0F0F_0F0F_0F0F
+  for i, mask in [
+    0x5555_5555_5555_5555,
+    0x3333_3333_3333_3333,
+    0x0F0F_0F0F_0F0F_0F0F
+  ]
+    x = (x & mask) + ((x >> (1 << i)) & mask)
 
-  x = (x & m1) + ((x >> 1) & m1)
-  x = (x & m2) + ((x >> 2) & m2)
-  x = (x & m3) + ((x >> 4) & m3)
-
-  x += x >> 8
-  x += x >> 16
-  x += x >> 32
+  for n in [8, 16, 32]
+  	x += x >> n
 
   return x & 0x7f
 }
@@ -53,12 +51,12 @@ for i in [0, 1, 0xFF]
 // Count the number of trailing zero bits in an integer
 fn tzcount(x) {
   return 0x3F + (!x)
-    - (((x & -x) & 0x0000_0000_FFFF_FFFF) ? 32 : 0)
-    - (((x & -x) & 0x0000_FFFF_0000_FFFF) ? 16 : 0)
-    - (((x & -x) & 0x00FF_00FF_00FF_00FF) ?  8 : 0)
-    - (((x & -x) & 0x0F0F_0F0F_0F0F_0F0F) ?  4 : 0)
-    - (((x & -x) & 0x3333_3333_3333_3333) ?  2 : 0)
-    - (((x & -x) & 0x5555_5555_5555_5555) ?  1 : 0)
+    - (((x & -x) & 0x0000_0000_FFFF_FFFF) and 32)
+    - (((x & -x) & 0x0000_FFFF_0000_FFFF) and 16)
+    - (((x & -x) & 0x00FF_00FF_00FF_00FF) and  8)
+    - (((x & -x) & 0x0F0F_0F0F_0F0F_0F0F) and  4)
+    - (((x & -x) & 0x3333_3333_3333_3333) and  2)
+    - (((x & -x) & 0x5555_5555_5555_5555) and  1)
 }
 
 for i in [1, 2, 32]
@@ -141,23 +139,20 @@ fn md5(msg) {
         d0 = 0x10325476
 
   local bytes
-  for i,c in msg {
+  for i,c in msg
     bytes[i] = byte(c)
-  }
 
   // Append the "1" bit
   bytes[#msg] = 0x80
 
   // Pad the message with zeros
-  while #bytes & 0x3f != 0x38 {
+  while #bytes & 0x3f != 0x38
     bytes[#bytes] = 0
-  }
 
   // Append the message's original length to the array of bytes
   local len = #msg << 3
-  for i in 0..7 {
+  for i in 0..7
     bytes[#bytes] = (len >> (i*8)) & 0xff
-  }
 
   // For each 512-bit chunk of the padded message
   for i in 0..#bytes/64-1 {
